@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.GridPane?>
 
 <fx:root type="javafx.scene.layout.GridPane"
 xmlns:fx="http://javafx.com/fxml/1">
+
+
 </fx:root>
-<Text fx:id=row_col_num"/>
 
