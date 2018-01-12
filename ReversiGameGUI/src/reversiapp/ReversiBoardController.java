@@ -1,6 +1,7 @@
 package reversiapp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.management.RuntimeErrorException;
 
@@ -14,15 +15,21 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import reversiapp.Point;
+
+
 public class ReversiBoardController extends GridPane{
 	private int[][] board;
+	private ArrayList<Point> possible_moves;
+	private PointsCounter counter;
 	private static final int FREE = 0;
-
+	public char blank = ' ';
 	private Point[][] all_players_list;
 	private int board_size;
 	private Text row_col_num;
+	
 	public ReversiBoardController(int[][] board){
 		this.board = board;
+		this.possible_moves = new ArrayList<Point>();
 		this.board_size = board.length;
 		this.all_players_list = new Point[board_size][board_size];
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReversiBoard.fxml"));
@@ -60,14 +67,42 @@ public class ReversiBoardController extends GridPane{
 //		}
 	}
 	
+	public void setPossibleMoves(ArrayList<Point> possible_moves) {
+		this.possible_moves.removeAll(this.possible_moves);
+		this.possible_moves.addAll(possible_moves);
+	}
+	
 	public void setPoint(Point p){
 		int row = p.get_row();
 		int col = p.get_col();
 		char sign = p.get_sign();
 		this.all_players_list[row][col].set_sign(sign);
-
+	}
+	
+	public int getBoardSize() {
+		return this.board_size;
+	}
+	
+	PointsCounter getCounter() {
+		return counter;
+	}
+	
+	public boolean isFull() {
+		int capacity = board_size * board_size;
+		return counter.getBlackCount() + counter.getWhiteCount() >= capacity;
 
 	}
+	public Point[][] getAllPlayersList() {
+		return this.all_players_list;
+	}
+	
+	
+	private void drawPossibleMoves(ArrayList<Point> possible_moves, int cellWidth, int cellHeight) {
+		//IMPLEMENT HERE AND CALL FROM DRAW
+
+		}
+	
+	
 	public void draw(){
 		this.getChildren().clear();
 		 
@@ -82,10 +117,11 @@ public class ReversiBoardController extends GridPane{
 			for (int j = 0; j < board[i].length; j++) {
 				
 				if (board[i][j] == FREE){
-					Rectangle rec = new Rectangle(cellWidth, cellHeight, Color.WHITE);
+					Rectangle rec = new Rectangle(cellWidth, cellHeight, Color.AQUAMARINE);
 					rec.setStroke(Color.BLACK);
 					this.add(rec, j, i);
 				}
+				
 				if (i == 0){
 					if (j == 0) continue;
 					String str = Integer.toString(j);
@@ -102,6 +138,8 @@ public class ReversiBoardController extends GridPane{
 				}
 			}
 		}
+		
+
 		//draw all players
 		for (int i = 0; i < board_size; i++) {
 			for (int j = 0; j < board_size; j++) {

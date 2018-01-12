@@ -9,5 +9,6 @@ fx:id="root" spacing="10">
 	<VBox spacing="10">
 		<Button>Start Game</Button>
 		<Button>End Game</Button>
+		
 	</VBox>
 </HBox>
