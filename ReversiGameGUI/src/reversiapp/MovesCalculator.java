@@ -40,14 +40,14 @@ public class MovesCalculator {
 	 * @param this_player_sign
 	 * @return list of points - options of moves
 	 */
-	public ArrayList<Point> calc_moves(ReversiBoardController board, char this_player_sign) {
+	public ArrayList<Point> calc_moves(Board board, char this_player_sign) {
 		//initialize the list, erase all the last options
 		this.options_list.removeAll(this.options_list);
 		for (int i = 0; i < board.getBoardSize(); i++) {
 			for (int j = 0; j < board.getBoardSize(); j++) {
-				Point p = board.getAllPlayersList()[i][j];
+				Point p = board.getAllPointsList()[i][j];
 				//if p is the opponent sign - check around her for options:
-				if (p.get_sign() != this_player_sign && p.get_sign() != board.blank) {
+				if (p.get_sign() != this_player_sign && p.get_sign() != board.getBlank()) {
 					checkDown(board, p, this_player_sign, options_list);
 					checkUp(board, p, this_player_sign, options_list);
 					checkRight(board, p, this_player_sign, options_list);
@@ -73,27 +73,27 @@ public class MovesCalculator {
 	 * @param this_playr_sign- char
 	 * @param options- a list of options to add to.
 	 */
-	private void checkRight(ReversiBoardController board, Point current_point,
+	private void checkRight(Board board, Point current_point,
 			char this_playr_sign, ArrayList<Point> options) {
 		if (current_point.get_sign() != this_playr_sign && current_point.get_sign()
-			!= board.blank) {
+			!= board.getBlank()) {
 			int row = current_point.get_row();
 			int col = current_point.get_col();
 			int i = 1;
 			//if the LEFT point from this current point is this player sign -
 			//continue to check RIGHT
-			if (col - 1 >= 0 && board.getAllPlayersList()[row][col - 1].get_sign() == this_playr_sign) {
+			if (col - 1 >= 0 && board.getAllPointsList()[row][col - 1].get_sign() == this_playr_sign) {
 				//keep moving RIGHT as long as its the opponent sign || board borders
-				while (col + i <= board.getBoardSize() && board.getAllPlayersList()[row][col + i].get_sign() == current_point.get_sign()) {
+				while (col + i < board.getBoardSize() && board.getAllPointsList()[row][col + i].get_sign() == current_point.get_sign()) {
 					i++;
 				}
 				//if this point is outside the boards, return
-				if (!(col + i <= board.getBoardSize())){
+				if (!(col + i < board.getBoardSize())){
 					return;
 				}
-				if (board.getAllPlayersList()[row][col + i].get_sign() == board.blank) {
+				if (board.getAllPointsList()[row][col + i].get_sign() == board.getBlank()) {
 					if (!allreadyInList(row, col + i)){
-						options.add(board.getAllPlayersList()[row][col + i]);
+						options.add(board.getAllPointsList()[row][col + i]);
 					}
 				}
 			}
@@ -110,25 +110,25 @@ public class MovesCalculator {
 	 * @param this_playr_sign- char
 	 * @param options- a list of options to add to.
 	 */
-	private void checkLeft(ReversiBoardController board, Point current_point,
+	private void checkLeft(Board board, Point current_point,
 		char this_playr_sign, ArrayList<Point> options) {
-	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
+	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.getBlank()) {
 		int row = current_point.get_row();
 		int col = current_point.get_col();
 		int i = 1;
 		//if the RIGHT point from this current point is this player sign - continue to check LEFT
-		if (col + 1 <= board.getBoardSize() && board.getAllPlayersList()[row][col + 1].get_sign() == this_playr_sign) {
+		if (col + 1 < board.getBoardSize() && board.getAllPointsList()[row][col + 1].get_sign() == this_playr_sign) {
 			//keep moving LEFT as long as its the opponent sign || board borders
-			while (col - i >= 0 && board.getAllPlayersList()[row][col - i].get_sign() == current_point.get_sign()) {
+			while (col - i >= 0 && board.getAllPointsList()[row][col - i].get_sign() == current_point.get_sign()) {
 				i++;
 			}
 			//if this point is outside the boards, return
 			if (!(col - i >= 0 )){
 				return;
 			}
-			if (board.getAllPlayersList()[row][col - i].get_sign() == board.blank) {
+			if (board.getAllPointsList()[row][col - i].get_sign() == board.getBlank()) {
 				if (!allreadyInList(row, col - i)){
-					options.add(board.getAllPlayersList()[row][col - i]);
+					options.add(board.getAllPointsList()[row][col - i]);
 				}
 
 
@@ -147,25 +147,25 @@ public class MovesCalculator {
 	 * @param this_playr_sign- char
 	 * @param options- a list of options to add to.
 	 */
-	private void checkDown(ReversiBoardController board, Point current_point,
+	private void checkDown(Board board, Point current_point,
 		char this_playr_sign, ArrayList<Point> options) {
-	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
+	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.getBlank()) {
 		int row = current_point.get_row();
 		int col = current_point.get_col();
 		int i = 1;
 		//if the UP point from this current point is this player sign - continue to check DOWN
-		if (row - 1 >= 0 && board.getAllPlayersList()[row - 1][col].get_sign() == this_playr_sign) {
+		if (row - 1 >= 0 && board.getAllPointsList()[row - 1][col].get_sign() == this_playr_sign) {
 			//keep moving DOWN as long as its the opponent sign || board borders
-			while (row + i <= board.getBoardSize() && board.getAllPlayersList()[row + i][col].get_sign() == current_point.get_sign()) {
+			while (row + i < board.getBoardSize() && board.getAllPointsList()[row + i][col].get_sign() == current_point.get_sign()) {
 				i++;
 			}
 			//if this point is outside the boards, return
-			if (!(row + i <= board.getBoardSize())){
+			if (!(row + i < board.getBoardSize())){
 				return;
 			}
-			if (board.getAllPlayersList()[row + i][col].get_sign() == board.blank) {
+			if (board.getAllPointsList()[row + i][col].get_sign() == board.getBlank()) {
 				if (!allreadyInList(row + i, col)){
-					options.add(board.getAllPlayersList()[row + i][col]);
+					options.add(board.getAllPointsList()[row + i][col]);
 				}
 			}
 		}
@@ -181,25 +181,25 @@ public class MovesCalculator {
 	 * @param this_playr_sign- char
 	 * @param options- a list of options to add to.
 	 */
-	private void checkUp(ReversiBoardController board, Point current_point,
+	private void checkUp(Board board, Point current_point,
 		char this_playr_sign, ArrayList<Point> options) {
-	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
+	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.getBlank()) {
 		int row = current_point.get_row();
 		int col = current_point.get_col();
 		int i = 1;
 		//if the DOWN point from this current point is this player sign - continue to check UP
-		if (row + 1 <= board.getBoardSize() && board.getAllPlayersList()[row + 1][col].get_sign() == this_playr_sign) {
+		if (row + 1 < board.getBoardSize() && board.getAllPointsList()[row + 1][col].get_sign() == this_playr_sign) {
 			//keep moving UP as long as its the opponent sign || board borders
-			while (row - i >= 0 && board.getAllPlayersList()[row - i][col].get_sign() == current_point.get_sign()) {
+			while (row - i >= 0 && board.getAllPointsList()[row - i][col].get_sign() == current_point.get_sign()) {
 				i++;
 			}
 			//if this point is outside the boards, return
 			if (!(row - i >= 0)){
 				return;
 			}
-			if (board.getAllPlayersList()[row - i][col].get_sign() == board.blank) {
+			if (board.getAllPointsList()[row - i][col].get_sign() == board.getBlank()) {
 				if (!allreadyInList(row - i, col)){
-					options.add(board.getAllPlayersList()[row - i][col]);
+					options.add(board.getAllPointsList()[row - i][col]);
 				}
 			}
 		}
@@ -215,25 +215,25 @@ public class MovesCalculator {
 	 * @param this_playr_sign- char
 	 * @param options- a list of options to add to.
 	 */
-	private void checkUpRightDiagonal(ReversiBoardController board, Point current_point,
+	private void checkUpRightDiagonal(Board board, Point current_point,
 		char this_playr_sign, ArrayList<Point> options) {
-	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
+	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.getBlank()) {
 		int row = current_point.get_row();
 		int col = current_point.get_col();
 		int i = 1;
 		//if the DOWN-LEFT point from this current point is this player sign - continue to check UP-RIGHT
-		if (row + 1 <= board.getBoardSize() && col - 1 >= 0 && board.getAllPlayersList()[row + 1][col - 1].get_sign() == this_playr_sign) {
+		if (row + 1 < board.getBoardSize() && col - 1 >= 0 && board.getAllPointsList()[row + 1][col - 1].get_sign() == this_playr_sign) {
 			//keep moving UP-RIGHT as long as its the opponent sign || board borders
-			while (row - i >= 0 && col + i <= board.getBoardSize() && board.getAllPlayersList()[row - i][col + i].get_sign() == current_point.get_sign()) {
+			while (row - i >= 0 && col + i < board.getBoardSize() && board.getAllPointsList()[row - i][col + i].get_sign() == current_point.get_sign()) {
 				i++;
 			}
 			//if this point is outside the boards, return
-			if (!(row - i >= 0 && col + i <= board.getBoardSize())){
+			if (!(row - i >= 0 && col + i < board.getBoardSize())){
 				return;
 			}
-			if (board.getAllPlayersList()[row - i][col + i].get_sign() == board.blank) {
+			if (board.getAllPointsList()[row - i][col + i].get_sign() == board.getBlank()) {
 				if (!allreadyInList(row - i, col + i)){
-					options.add(board.getAllPlayersList()[row - i][col + i]);
+					options.add(board.getAllPointsList()[row - i][col + i]);
 				}
 
 			}
@@ -250,26 +250,26 @@ public class MovesCalculator {
 	 * @param this_playr_sign- char
 	 * @param options- a list of options to add to.
 	 */
-	private void checkUpLeftDiagonal(ReversiBoardController board, Point current_point,
+	private void checkUpLeftDiagonal(Board board, Point current_point,
 		char this_playr_sign, ArrayList<Point> options) {
-	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
+	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.getBlank()) {
 		int row = current_point.get_row();
 		int col = current_point.get_col();
 		int i = 1;
 		//if the DOWN-RIGHT point from this current point is this player sign - continue to check UP-LEFT
-		if (row + 1 <= board.getBoardSize() && col + 1 <= board.getBoardSize()
-				&& board.getAllPlayersList()[row + 1][col + 1].get_sign() == this_playr_sign) {
+		if (row + 1 < board.getBoardSize() && col + 1 < board.getBoardSize()
+				&& board.getAllPointsList()[row + 1][col + 1].get_sign() == this_playr_sign) {
 			//keep moving UP-LEFT as long as its the opponent sign || board borders
-			while (row - i >= 0 && col - i >= 0 && board.getAllPlayersList()[row - i][col - i].get_sign() == current_point.get_sign()) {
+			while (row - i >= 0 && col - i >= 0 && board.getAllPointsList()[row - i][col - i].get_sign() == current_point.get_sign()) {
 				i++;
 			}
 			//if this point is outside the boards, return
 			if (!(row - i >= 0 && col - i >= 0)){
 				return;
 			}
-			if (board.getAllPlayersList()[row - i][col - i].get_sign() == board.blank) {
+			if (board.getAllPointsList()[row - i][col - i].get_sign() == board.getBlank()) {
 				if (!allreadyInList(row - i, col - i)){
-					options.add(board.getAllPlayersList()[row - i][col - i]);
+					options.add(board.getAllPointsList()[row - i][col - i]);
 				}
 			}
 		}
@@ -285,25 +285,25 @@ public class MovesCalculator {
 	 * @param this_playr_sign- char
 	 * @param options- a list of options to add to.
 	 */
-	private void checkDownRightDiagonal(ReversiBoardController board, Point current_point,
+	private void checkDownRightDiagonal(Board board, Point current_point,
 		char this_playr_sign, ArrayList<Point> options) {
-	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
+	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.getBlank()) {
 		int row = current_point.get_row();
 		int col = current_point.get_col();
 		int i = 1;
 		//if the UP-LEFT point from this current point is this player sign - continue to check DOWN-RIGHT
-		if (row - 1 >= 0 && col - 1 >= 0 && board.getAllPlayersList()[row - 1][col - 1].get_sign() == this_playr_sign) {
+		if (row - 1 >= 0 && col - 1 >= 0 && board.getAllPointsList()[row - 1][col - 1].get_sign() == this_playr_sign) {
 			//keep moving DOWN-RIGHT as long as its the opponent sign || board borders
-			while (row + i <= board.getBoardSize() && col + i <= board.getBoardSize() && board.getAllPlayersList()[row + i][col + i].get_sign() == current_point.get_sign()) {
+			while (row + i < board.getBoardSize() && col + i < board.getBoardSize() && board.getAllPointsList()[row + i][col + i].get_sign() == current_point.get_sign()) {
 				i++;
 			}
 			//if this point is outside the boards, return
-			if (!(row + i <= board.getBoardSize() && col + i <= board.getBoardSize() )){
+			if (!(row + i < board.getBoardSize() && col + i < board.getBoardSize() )){
 				return;
 			}
-			if (board.getAllPlayersList()[row + i][col + i].get_sign() == board.blank) {
+			if (board.getAllPointsList()[row + i][col + i].get_sign() == board.getBlank()) {
 				if (!allreadyInList(row + i, col + i)){
-					options.add(board.getAllPlayersList()[row + i][col + i]);
+					options.add(board.getAllPointsList()[row + i][col + i]);
 				}
 			}
 		}
@@ -320,25 +320,25 @@ public class MovesCalculator {
 	 * @param this_playr_sign- char
 	 * @param options- a list of options to add to.
 	 */
-	private void checkDownLeftDiagonal(ReversiBoardController board, Point current_point,
+	private void checkDownLeftDiagonal(Board board, Point current_point,
 			char this_playr_sign, ArrayList<Point> options) {
-		if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
+		if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.getBlank()) {
 			int row = current_point.get_row();
 			int col = current_point.get_col();
 			int i = 1;
 			//if the UP-RIGHT point from this current point is this player sign - continue to check DOWN-LEFT
-			if (row - 1 >= 0 && col + 1 <= board.getBoardSize() && board.getAllPlayersList()[row - 1][col + 1].get_sign() == this_playr_sign) {
+			if (row - 1 >= 0 && col + 1 < board.getBoardSize() && board.getAllPointsList()[row - 1][col + 1].get_sign() == this_playr_sign) {
 				//keep moving DOWN-LEFT as long as its the opponent sign || board borders
-				while (row + i <= board.getBoardSize() && col - i >= 0 && board.getAllPlayersList()[row + i][col - i].get_sign() == current_point.get_sign()) {
+				while (row + i < board.getBoardSize() && col - i >= 0 && board.getAllPointsList()[row + i][col - i].get_sign() == current_point.get_sign()) {
 					i++;
 				}
 				//if this point is outside the boards, return
-				if (!(row + i <= board.getBoardSize() && col - i >= 0)){
+				if (!(row + i < board.getBoardSize() && col - i >= 0)){
 					return;
 				}
-				if (board.getAllPlayersList()[row + i][col - i].get_sign() == board.blank) {
+				if (board.getAllPointsList()[row + i][col - i].get_sign() == board.getBlank()) {
 					if (!allreadyInList(row + i, col - i)){
-						options.add(board.getAllPlayersList()[row + i][col - i]);
+						options.add(board.getAllPointsList()[row + i][col - i]);
 					}
 
 				}

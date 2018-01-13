@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  */
 public class Fliper {
-	private ArrayList<Point> points_to_flip;
+	private ArrayList<Point> points_to_flip = new ArrayList<Point>();
 	
 	/**
 	 * constructor
@@ -24,7 +24,7 @@ public class Fliper {
 	 * @return - the number of points flipped
 	 * @flip_to - the sign to change to.
 	*/
-	public int flip(ReversiBoardController board, Point chosen_point, char flip_to) {
+	public int flip(Board board, Point chosen_point, char flip_to) {
 		this.points_to_flip.removeAll(this.points_to_flip);
 		ArrayList<Point> temp;
 		checkAndUpdateDown(chosen_point, board, flip_to);
@@ -71,7 +71,7 @@ public class Fliper {
 	 * the direction it responsible of.
 	 * @return - vector of points need to be flipped.
 	 */
-	private void checkAndUpdateUp(Point chosen_point, ReversiBoardController board, char flip_to) {
+	private void checkAndUpdateUp(Point chosen_point, Board board, char flip_to) {
 		char sign = flip_to;
 		char opp_sign = FindOpponentSign(sign);
 		ArrayList<Point> temp = new ArrayList<Point>();
@@ -80,14 +80,14 @@ public class Fliper {
 		int col = chosen_point.get_col();
 		int i = 1;
 		while (true) {
-		if (row - i >= 0 && board.getAllPlayersList()[row - i][col].get_sign() == opp_sign) {
-			temp.add(board.getAllPlayersList()[row - i][col]);
+		if (row - i >= 0 && board.getAllPointsList()[row - i][col].get_sign() == opp_sign) {
+			temp.add(board.getAllPointsList()[row - i][col]);
 			i++;
 		}
 		else
 			break;
 		}
-		if (row - i >=0 && board.getAllPlayersList()[row - i][col].get_sign() == sign) {
+		if (row - i >=0 && board.getAllPointsList()[row - i][col].get_sign() == sign) {
 			if (temp.size() > 0) {
 			this.points_to_flip.addAll(temp);
 			}
@@ -96,7 +96,7 @@ public class Fliper {
 	}
 	
 	
-	private void checkAndUpdateDown(Point chosen_point, ReversiBoardController board, char flip_to) {
+	private void checkAndUpdateDown(Point chosen_point, Board board, char flip_to) {
 		char sign = flip_to;
 		char opp_sign = FindOpponentSign(sign);
 		ArrayList<Point> temp = new ArrayList<Point>();
@@ -104,21 +104,21 @@ public class Fliper {
 		int col = chosen_point.get_col();
 		int i = 1;
 		while (true) {
-		if (row + i <= board.getBoardSize() && board.getAllPlayersList()[row + i][col].get_sign() == opp_sign) {
-			temp.add(board.getAllPlayersList()[row + i][col]);
+		if (row + i < board.getBoardSize() && board.getAllPointsList()[row + i][col].get_sign() == opp_sign) {
+			temp.add(board.getAllPointsList()[row + i][col]);
 			i++;
 		}
 		else
 			break;
 			}
-		if (row + i <= board.getBoardSize() && board.getAllPlayersList()[row + i][col].get_sign() == sign) {
+		if (row + i < board.getBoardSize() && board.getAllPointsList()[row + i][col].get_sign() == sign) {
 			if (temp.size() > 0) {
 				this.points_to_flip.addAll(temp);
 			}
 		}
 	}
 	
-	private void checkAndUpdateRight(Point chosen_point, ReversiBoardController board, char flip_to) {
+	private void checkAndUpdateRight(Point chosen_point, Board board, char flip_to) {
 		char sign = flip_to;
 		char opp_sign = FindOpponentSign(sign);
 		ArrayList<Point> temp = new ArrayList<Point>();
@@ -126,124 +126,124 @@ public class Fliper {
 		int col = chosen_point.get_col();
 		int i = 1;
 		while (true) {
-		if (col + i <= board.getBoardSize() && board.getAllPlayersList()[row][col + i].get_sign() == opp_sign) {
-			temp.add(board.getAllPlayersList()[row][col + i]);
+		if (col + i < board.getBoardSize() && board.getAllPointsList()[row][col + i].get_sign() == opp_sign) {
+			temp.add(board.getAllPointsList()[row][col + i]);
 			i++;
 		}
 		else
 			break;
 			}
-		if (col + i <= board.getBoardSize() && board.getAllPlayersList()[row][col + i].get_sign() == sign) {
+		if (col + i < board.getBoardSize() && board.getAllPointsList()[row][col + i].get_sign() == sign) {
 			if (temp.size() > 0) {
 				this.points_to_flip.addAll(temp);
 			}
 		}
 	}
 	
-	private void checkAndUpdateLeft(Point chosen_point, ReversiBoardController board, char flip_to) {
+	private void checkAndUpdateLeft(Point chosen_point, Board board, char flip_to) {
 		char opp_sign = FindOpponentSign(flip_to);
 		ArrayList<Point> temp = new ArrayList<Point>();
 		int row = chosen_point.get_row();
 		int col = chosen_point.get_col();
 		int i = 1;
 		while (true) {
-		if (col - i >= 0 && board.getAllPlayersList()[row][col - i].get_sign() == opp_sign) {
-			temp.add(board.getAllPlayersList()[row][col - i]);
+		if (col - i >= 0 && board.getAllPointsList()[row][col - i].get_sign() == opp_sign) {
+			temp.add(board.getAllPointsList()[row][col - i]);
 			i++;
 		}
 		else
 			break;
 			}
-		if (col - i >= 0 && board.getAllPlayersList()[row][col - i].get_sign() == flip_to) {
+		if (col - i >= 0 && board.getAllPointsList()[row][col - i].get_sign() == flip_to) {
 			if (temp.size() > 0) {
 				this.points_to_flip.addAll(temp);
 			}
 		}
 	}
 	
-	private void checkAndUpdateUpRight(Point chosen_point, ReversiBoardController board, char flip_to) {
+	private void checkAndUpdateUpRight(Point chosen_point, Board board, char flip_to) {
 		char opp_sign = FindOpponentSign(flip_to);
 		ArrayList<Point> temp = new ArrayList<Point>();
 		int row = chosen_point.get_row();
 		int col = chosen_point.get_col();
 		int i = 1;
 		while (true) {
-		if (row - i >= 0 && col + i <= board.getBoardSize() && board.getAllPlayersList()[row - i][col + i].get_sign() == opp_sign) {
-			temp.add(board.getAllPlayersList()[row - i][col + i]);
+		if (row - i >= 0 && col + i < board.getBoardSize() && board.getAllPointsList()[row - i][col + i].get_sign() == opp_sign) {
+			temp.add(board.getAllPointsList()[row - i][col + i]);
 			i++;
 		}
 		else
 			break;
 			}
-		if (row - i >= 0 && col + i <= board.getBoardSize()
-				&& board.getAllPlayersList()[row - i][col + i].get_sign() == flip_to) {
+		if (row - i >= 0 && col + i < board.getBoardSize()
+				&& board.getAllPointsList()[row - i][col + i].get_sign() == flip_to) {
 			if (temp.size() > 0) {
 				this.points_to_flip.addAll(temp);
 			}
 		}
 	}
 	
-	private void checkAndUpdateUpLeft(Point chosen_point, ReversiBoardController board, char flip_to) {
+	private void checkAndUpdateUpLeft(Point chosen_point, Board board, char flip_to) {
 		char opp_sign = FindOpponentSign(flip_to);
 		ArrayList<Point> temp = new ArrayList<Point>();
 		int row = chosen_point.get_row();
 		int col = chosen_point.get_col();
 		int i = 1;
 		while (true) {
-		if (row - i >= 0 && col - i >= 0 && board.getAllPlayersList()[row - i][col - i].get_sign() == opp_sign) {
-			temp.add(board.getAllPlayersList()[row - i][col - i]);
+		if (row - i >= 0 && col - i >= 0 && board.getAllPointsList()[row - i][col - i].get_sign() == opp_sign) {
+			temp.add(board.getAllPointsList()[row - i][col - i]);
 			i++;
 		}
 		else
 			break;
 			}
-		if (row - i >= 0 && col - i >= 0 && board.getAllPlayersList()[row - i][col - i].get_sign() == flip_to) {
+		if (row - i >= 0 && col - i >= 0 && board.getAllPointsList()[row - i][col - i].get_sign() == flip_to) {
 			if (temp.size() > 0) {
 				this.points_to_flip.addAll(temp);
 			}
 		}
 	}
 	
-	private void checkAndUpdateDownRight(Point chosen_point, ReversiBoardController board, char flip_to) {
+	private void checkAndUpdateDownRight(Point chosen_point, Board board, char flip_to) {
 		char opp_sign = FindOpponentSign(flip_to);
 		ArrayList<Point> temp = new ArrayList<Point>();
 		int row = chosen_point.get_row();
 		int col = chosen_point.get_col();
 		int i = 1;
 		while (true) {
-		if (row + i <= board.getBoardSize() && col + i <= board.getBoardSize() &&
-				board.getAllPlayersList()[row + i][col + i].get_sign() == opp_sign) {
-			temp.add(board.getAllPlayersList()[row + i][col + i]);
+		if (row + i < board.getBoardSize() && col + i < board.getBoardSize() &&
+				board.getAllPointsList()[row + i][col + i].get_sign() == opp_sign) {
+			temp.add(board.getAllPointsList()[row + i][col + i]);
 			i++;
 		}
 		else
 			break;
 			}
-		if (row + i <= board.getBoardSize() && col + i <= board.getBoardSize() &&
-				board.getAllPlayersList()[row + i][col + i].get_sign() == flip_to) {
+		if (row + i < board.getBoardSize() && col + i < board.getBoardSize() &&
+				board.getAllPointsList()[row + i][col + i].get_sign() == flip_to) {
 			if (temp.size() > 0) {
 				this.points_to_flip.addAll(temp);
 			}
 		}
 	}
 	
-	private void checkAndUpdateDownLeft(Point chosen_point, ReversiBoardController board, char flip_to) {
+	private void checkAndUpdateDownLeft(Point chosen_point, Board board, char flip_to) {
 		char opp_sign = FindOpponentSign(flip_to);
 		ArrayList<Point> temp = new ArrayList<Point>();
 		int row = chosen_point.get_row();
 		int col = chosen_point.get_col();
 		int i = 1;
 		while (true) {
-		if (row + i <= board.getBoardSize() && col - i >= 0 &&
-				board.getAllPlayersList()[row + i][col - i].get_sign() == opp_sign) {
-			temp.add(board.getAllPlayersList()[row + i][col - i]);
+		if (row + i < board.getBoardSize() && col - i >= 0 &&
+				board.getAllPointsList()[row + i][col - i].get_sign() == opp_sign) {
+			temp.add(board.getAllPointsList()[row + i][col - i]);
 			i++;
 		}
 		else
 			break;
 			}
-		if (row + i <= board.getBoardSize() && col - i >= 0 &&
-				board.getAllPlayersList()[row + i][col - i].get_sign() == flip_to) {
+		if (row + i < board.getBoardSize() && col - i >= 0 &&
+				board.getAllPointsList()[row + i][col - i].get_sign() == flip_to) {
 			if (temp.size() > 0) {
 				this.points_to_flip.addAll(temp);
 			}
