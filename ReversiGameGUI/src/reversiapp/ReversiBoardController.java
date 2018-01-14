@@ -8,6 +8,7 @@ import javax.management.RuntimeErrorException;
 //import com.sun.javafx.geom.Rectangle;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -35,36 +36,12 @@ public class ReversiBoardController extends GridPane{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReversiBoard.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
-
+		
 		for (int i = 0; i < this.board_size; i++) {
 			for (int j = 0; j < this.board_size; j++) {
 				all_players_list[i][j] = new Point(i, j, ' ');
 			}
 		}
-
-//		try{
-//			fxmlLoader.load();
-//			this.setOnKeyPressed(event -> {
-//				switch (event.getCode()) {
-//				case DOWN:
-//				black_player.moveDown();
-//				break;
-//				case UP:
-//				black_player.moveUp();
-//				break;
-//				case LEFT:
-//					black_player.moveLeft();
-//				break;
-//				case RIGHT:
-//					black_player.moveRight();
-//				break;
-//				}
-//				event.consume();
-//			});
-//			
-//		} catch (IOException e) {
-//			throw new RuntimeException(e);
-//		}
 	}
 	
 	public void setPossibleMoves(ArrayList<Point> possible_moves) {
@@ -117,9 +94,14 @@ public class ReversiBoardController extends GridPane{
 			for (int j = 0; j < board[i].length; j++) {
 				
 				if (board[i][j] == FREE){
+					Button cell = new Button();
+					cell.setPrefWidth(cellWidth);
+					cell.setPrefHeight(cellHeight);
+					this.add(cell, j, i);
 					Rectangle rec = new Rectangle(cellWidth, cellHeight, Color.AQUAMARINE);
 					rec.setStroke(Color.BLACK);
 					this.add(rec, j, i);
+					
 				}
 				
 				if (i == 0){

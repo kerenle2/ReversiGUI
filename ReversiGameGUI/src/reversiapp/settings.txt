@@ -1,0 +1,4 @@
+first: black
+color1: black
+color2: pink
+board_size: 6

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 
 <fx:root type="javafx.scene.layout.GridPane"
-xmlns:fx="http://javafx.com/fxml/1">
+xmlns:fx="http://javafx.com/fxml/1" fx:id="board" >
 
 
 </fx:root>
