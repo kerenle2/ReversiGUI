@@ -32,11 +32,10 @@
             </LinearGradient>
          </stroke>
       </Text>
-      <Button defaultButton="true" layoutX="130.0" layoutY="120.0" mnemonicParsing="false" mouseTransparent="true" onAction="#start" prefHeight="49.0" prefWidth="136.0" style="-fx-background-color: linear-gradient(#ffd65b, #e68400),        linear-gradient(#ffef84, #f2ba44),        linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));;" text="START" wrapText="true" AnchorPane.leftAnchor="132.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="120.0">
+ <Button id="start" layoutX="159.0" layoutY="120.0" mnemonicParsing="false" onAction="#start" prefHeight="49.0" prefWidth="206.0" style="-fx-background-color: linear-gradient(#ffd65b, #e68400),        linear-gradient(#ffef84, #f2ba44),        linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));;" text="START" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="155.0">
          <font>
-            <Font name="Arial Bold" size="13.0" />
-         </font>
-      </Button>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
       <Button layoutX="130.0" layoutY="190.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="136.0" style="-fx-background-color: linear-gradient(#ffd65b, #e68400),        linear-gradient(#ffef84, #f2ba44),        linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));;" text="SETTINGS" AnchorPane.leftAnchor="132.0" AnchorPane.rightAnchor="132.0">
          <font>
             <Font name="System Bold" size="13.0" />

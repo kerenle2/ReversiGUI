@@ -52,11 +52,9 @@ public class TurnBase {
 					tie.setFill(Color.RED);
 					board_controller.add(tie, board_controller.getBoardSize() / 2, board_controller.getBoardSize() / 2);
 					System.out.println("Tie! X & O have the same number of points");
-					//System.exit(0);;
 				}
 				else {
 					System.out.println("the winner is: " + winner);
-					//System.exit(0);;
 
 				}
 			}
@@ -64,6 +62,8 @@ public class TurnBase {
 
 			//this->console.printCounter(board.getCounter());
 		} else {
+			board_controller.setGameEnded(true);
+
 			char winner = findWinner();
 			if (winner == 'T') {
 			//	cout << "Tie! X & O have the same number of points";
