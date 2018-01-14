@@ -27,9 +27,7 @@ public class ReversiBoardController extends GridPane{
 //	private int[][] board;
 	TurnBase turn_base;
 	private FXMLLoader fxmlLoader;
-	private static final int FREE = 0;
 	private int board_size;
-	private Text row_col_num;
 	private boolean game_ended;
 	
 	public ReversiBoardController(int board_size){
@@ -42,10 +40,10 @@ public class ReversiBoardController extends GridPane{
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 		this.fxmlLoader = fxmlLoader;
-		
-
 	}
-	int width = (int)this.getPrefWidth();
+	
+
+	//int width = (int)this.getPrefWidth();
 	
 
 	
@@ -62,7 +60,7 @@ public class ReversiBoardController extends GridPane{
 	
 	
 	public void draw(){
-		this.getChildren().clear();
+	//	this.getChildren().clear();
 		 
 		int height = (int)this.getPrefHeight();
 		int width = (int)this.getPrefWidth();

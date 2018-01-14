@@ -29,7 +29,7 @@ public class ReversiGameController implements Initializable{
 	@FXML
 	private Button start = new Button();
 	private int board_size;	 
-	private int[][]board;
+	//private int[][]board;
 	//private Player[] players = new Player[2];
 	private ArrayList<Player> players;
 	private static TurnBase turn_base;
@@ -78,7 +78,7 @@ public class ReversiGameController implements Initializable{
 			this.turn_base = new TurnBase(reversiBoard, players);
 
 			//initialize first turn possible moves:
-			black.get_possible_moves(reversiBoard.getBoard(), turn_base.getMovesCalculator());
+			players.get(0).get_possible_moves(reversiBoard.getBoard(), turn_base.getMovesCalculator());
 			
 			reversiBoard.draw();
 	}
