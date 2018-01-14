@@ -1,13 +1,18 @@
 package reversiapp;
 
+import java.awt.event.ActionEvent;
+import java.awt.print.Printable;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.management.RuntimeErrorException;
 
+import javafx.event.EventHandler;
 //import com.sun.javafx.geom.Rectangle;
 
 import javafx.fxml.FXMLLoader;
+
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -19,58 +24,37 @@ import reversiapp.Point;
 
 
 public class ReversiBoardController extends GridPane{
-	private int[][] board;
-	private ArrayList<Point> possible_moves;
-	private PointsCounter counter;
-	private static final int FREE = 0;
-	public char blank = ' ';
-	private Point[][] all_players_list;
+	Board board;
+//	private int[][] board;
+	TurnBase turn_base;
+	private FXMLLoader fxmlLoader;
+//	private static final int FREE = 0;
 	private int board_size;
-	private Text row_col_num;
+//	private Text row_col_num;
+	private boolean game_ended;
 	
-	public ReversiBoardController(int[][] board){
-		this.board = board;
-		this.possible_moves = new ArrayList<Point>();
-		this.board_size = board.length;
-		this.all_players_list = new Point[board_size][board_size];
+	public ReversiBoardController(int board_size){
+		//this.board = board;
+	//	this.board_size = board.length;
+		this.game_ended = false;
+		this.board_size = board_size;
+		this.board = new Board(board_size);
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReversiBoard.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
-		
-		for (int i = 0; i < this.board_size; i++) {
-			for (int j = 0; j < this.board_size; j++) {
-				all_players_list[i][j] = new Point(i, j, ' ');
-			}
-		}
-	}
+		this.fxmlLoader = fxmlLoader;
+
+}
 	
-	public void setPossibleMoves(ArrayList<Point> possible_moves) {
-		this.possible_moves.removeAll(this.possible_moves);
-		this.possible_moves.addAll(possible_moves);
-	}
 	
-	public void setPoint(Point p){
-		int row = p.get_row();
-		int col = p.get_col();
-		char sign = p.get_sign();
-		this.all_players_list[row][col].set_sign(sign);
-	}
+//	}
+//	int width = (int)this.getPrefWidth();
 	
+
+	
+
 	public int getBoardSize() {
 		return this.board_size;
-	}
-	
-	PointsCounter getCounter() {
-		return counter;
-	}
-	
-	public boolean isFull() {
-		int capacity = board_size * board_size;
-		return counter.getBlackCount() + counter.getWhiteCount() >= capacity;
-
-	}
-	public Point[][] getAllPlayersList() {
-		return this.all_players_list;
 	}
 	
 	
@@ -86,38 +70,45 @@ public class ReversiBoardController extends GridPane{
 		int height = (int)this.getPrefHeight();
 		int width = (int)this.getPrefWidth();
 		
-		int cellHeight = height / board.length;
-		int cellWidth = width / board[0].length;
+		int cellHeight = height / board_size;
+		int cellWidth = width / board_size;
 		
 		//draw board 
-		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; j < board[i].length; j++) {
-				
-				if (board[i][j] == FREE){
-					Button cell = new Button();
-					cell.setPrefWidth(cellWidth);
-					cell.setPrefHeight(cellHeight);
-					this.add(cell, j, i);
-					Rectangle rec = new Rectangle(cellWidth, cellHeight, Color.AQUAMARINE);
+//<<<<<<< HEAD
+//		for (int i = 0; i < board.length; i++) {
+//			for (int j = 0; j < board[i].length; j++) {
+//				
+//				if (board[i][j] == FREE){
+//					Button cell = new Button();
+//					cell.setPrefWidth(cellWidth);
+//					cell.setPrefHeight(cellHeight);
+//					this.add(cell, j, i);
+//					Rectangle rec = new Rectangle(cellWidth, cellHeight, Color.AQUAMARINE);
+//					rec.setStroke(Color.BLACK);
+//					this.add(rec, j, i);
+//					
+//				}
+//				
+//				if (i == 0){
+//					if (j == 0) continue;
+//					String str = Integer.toString(j);
+//					this.row_col_num = new Text("   " + str);
+//					this.row_col_num.setFont(Font.font("Arial Black", cellWidth/3));
+//					this.add(row_col_num, j, i);
+//				}
+//				if (j == 0){
+//					if (i == 0) continue;
+//					String str = Integer.toString(i);
+//					this.row_col_num = new Text("   " + str);
+//					this.row_col_num.setFont(Font.font("Arial Black", cellWidth/3));
+//					this.add(row_col_num, j, i);
+//				}
+//=======
+		for (int i = 0; i < board_size; i++) {
+			for (int j = 0; j < board_size; j++) {
+					Rectangle rec = new Rectangle(cellWidth, cellHeight, Color.ANTIQUEWHITE);
 					rec.setStroke(Color.BLACK);
 					this.add(rec, j, i);
-					
-				}
-				
-				if (i == 0){
-					if (j == 0) continue;
-					String str = Integer.toString(j);
-					this.row_col_num = new Text("   " + str);
-					this.row_col_num.setFont(Font.font("Arial Black", cellWidth/3));
-					this.add(row_col_num, j, i);
-				}
-				if (j == 0){
-					if (i == 0) continue;
-					String str = Integer.toString(i);
-					this.row_col_num = new Text("   " + str);
-					this.row_col_num.setFont(Font.font("Arial Black", cellWidth/3));
-					this.add(row_col_num, j, i);
-				}
 			}
 		}
 		
@@ -125,18 +116,54 @@ public class ReversiBoardController extends GridPane{
 		//draw all players
 		for (int i = 0; i < board_size; i++) {
 			for (int j = 0; j < board_size; j++) {
-				if (all_players_list[i][j].get_sign() == 'X'){
-					Circle player = new Circle(cellWidth/2.5, Color.BLACK);
-					this.add(player, j, i);
+				if (board.getAllPointsList()[i][j].get_sign() == 'X' || board.getAllPointsList()[i][j].get_sign() == 'O'){
+					Node n = board.getAllPointsList()[i][j].draw(cellWidth);
+					this.add(n, j, i);
 				}
-				
-				else if(all_players_list[i][j].get_sign() == 'O'){
-					Circle player = new Circle(cellWidth/2.5, Color.RED);
-					this.add(player, j, i);
-				}
-				else continue;
+
+//				else continue;
 			}
 		}
-	}
+
+		//make buttons for the possible moves:
+		if (!game_ended) {
+		for (int i = 0; i < board.getPossibleMoves().size(); i++) {
+			Button move = new Button();
+			move.setPrefWidth(cellWidth);
+			move.setPrefHeight(cellWidth);
+
+			String s ="<ColorInput" + "{paint=}" + "#eb25e4" + "/>"; //it doesn't work yet!!! trying to add colors to button to each player moves
+			move.setStyle(s);
+			this.add(move, board.getPossibleMoves().get(i).get_col(), board.getPossibleMoves().get(i).get_row());
+			String row = String.valueOf(board.getPossibleMoves().get(i).get_row());
+			row = row.concat(",");
+			String col = String.valueOf(board.getPossibleMoves().get(i).get_col());
+			String id = row.concat(col);
+			move.setId(id);
+			move.setOnAction(event-> {
+				ReversiGameController.handlePointClick(move);
+			});
+		}
+		}
+
+	} //end of draw funtion
 		 
+	public void setPoint(Point p){
+		this.board.setPoint(p);
+	}
+	
+	public Board getBoard() {
+		return this.board;
+	}
+	
+	public void setGameEnded(boolean TorF) {
+		this.game_ended = TorF;
+		this.board.getPossibleMoves().removeAll(this.board.getPossibleMoves());
+	}
+	
+	public boolean isFull() {
+		return this.board.isFull();
+
+	}
+	
 }

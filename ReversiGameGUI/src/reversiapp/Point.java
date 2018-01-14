@@ -1,4 +1,9 @@
 package reversiapp;
+
+import javafx.scene.Node;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
 public class Point {
 	private int row,col;
 	private char sign; 
@@ -7,6 +12,7 @@ public class Point {
 		this.col = 0;
 		this.sign = 'N'; // not initiaized
 	}
+	
 	public Point(int row, int col, char sign) {
 		this.row = row;
 		this.col = col;
@@ -31,7 +37,7 @@ public class Point {
 	}
 
 	public int get_col() {
-		return this.col;
+		return this.col;		
 	}
 
 	public char get_sign() {
@@ -47,5 +53,20 @@ public class Point {
 
 	public void set_sign(char sign) {
 		this.sign = sign;
+	}
+	
+	public Node draw(int cellWidth) {
+		if (this.sign == 'X') {
+			Circle player = new Circle(cellWidth/2.5, Color.BLACK);
+			return player;
+
+
+		}
+		else if (this.sign == 'O') {
+			Circle player = new Circle(cellWidth/2.5, Color.WHITE);
+			return player;
+		}
+		
+		else return null;
 	}
 }
