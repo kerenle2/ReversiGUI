@@ -30,11 +30,12 @@ public class ReversiBoardController extends GridPane{
 	private static final int FREE = 0;
 	private int board_size;
 	private Text row_col_num;
+	private boolean game_ended;
 	
 	public ReversiBoardController(int board_size){
 		//this.board = board;
 	//	this.board_size = board.length;
-		
+		this.game_ended = false;
 		this.board_size = board_size;
 		this.board = new Board(board_size);
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReversiBoard.fxml"));
@@ -72,27 +73,9 @@ public class ReversiBoardController extends GridPane{
 		//draw board 
 		for (int i = 0; i < board_size; i++) {
 			for (int j = 0; j < board_size; j++) {
-				
-				//if (board.getAllPointsList()[i][j].get_sign() == " "){
 					Rectangle rec = new Rectangle(cellWidth, cellHeight, Color.ANTIQUEWHITE);
 					rec.setStroke(Color.BLACK);
 					this.add(rec, j, i);
-			//	}
-				
-//				if (i == 0){
-//					if (j == 0) continue;
-//					String str = Integer.toString(j);
-//					this.row_col_num = new Text("   " + str);
-//					this.row_col_num.setFont(Font.font("Arial Black", cellWidth/3));
-//					this.add(row_col_num, j, i);
-//				}
-//				if (j == 0){
-//					if (i == 0) continue;
-//					String str = Integer.toString(i);
-//					this.row_col_num = new Text("   " + str);
-//					this.row_col_num.setFont(Font.font("Arial Black", cellWidth/3));
-//					this.add(row_col_num, j, i);
-//				}
 			}
 		}
 		
@@ -101,15 +84,16 @@ public class ReversiBoardController extends GridPane{
 		for (int i = 0; i < board_size; i++) {
 			for (int j = 0; j < board_size; j++) {
 				if (board.getAllPointsList()[i][j].get_sign() == 'X' || board.getAllPointsList()[i][j].get_sign() == 'O'){
-					//Circle player = new Circle(cellWidth/2.5, Color.BLACK);
 					Node n = board.getAllPointsList()[i][j].draw(cellWidth);
 					this.add(n, j, i);
 				}
-				else continue;
+
+//				else continue;
 			}
 		}
 
 		//make buttons for the possible moves:
+		if (!game_ended) {
 		for (int i = 0; i < board.getPossibleMoves().size(); i++) {
 			Button move = new Button();
 			move.setPrefWidth(cellWidth);
@@ -127,8 +111,9 @@ public class ReversiBoardController extends GridPane{
 				ReversiGameController.handlePointClick(move);
 			});
 		}
+		}
 
-	}
+	} //end of draw funtion
 		 
 	public void setPoint(Point p){
 		this.board.setPoint(p);
@@ -137,6 +122,12 @@ public class ReversiBoardController extends GridPane{
 	public Board getBoard() {
 		return this.board;
 	}
+	
+	public void setGameEnded(boolean TorF) {
+		this.game_ended = TorF;
+		this.board.getPossibleMoves().removeAll(this.board.getPossibleMoves());
+	}
+	
 	public boolean isFull() {
 		return this.board.isFull();
 

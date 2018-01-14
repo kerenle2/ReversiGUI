@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>	
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
-	
-<HBox xmlns:fx="http://javafx.com/fxml/1" 
-fx:controller="reversiapp.ReversiGameController"
-fx:id="root" spacing="10">
-	<VBox spacing="10">
-		<Button>Start Game</Button>
-		<Button>End Game</Button>
-		
-	</VBox>
-</HBox>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.event.ActionEvent?>
+
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reversiapp.ReversiGameController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="423.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@wood.jpeg" />
+         </image>
+      </ImageView>
+      <Text fill="#2f2a14" layoutX="31.0" layoutY="58.0" strokeType="INSIDE" strokeWidth="3.0" text="Reversi Game" textOrigin="CENTER" wrappingWidth="341.63720703125">
+         <font>
+            <Font name="Andale Mono" size="46.0" />
+         </font>
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0" proportional="false">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="#0d0c0c" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Text>
+      <Button defaultButton="true" layoutX="130.0" layoutY="120.0" mnemonicParsing="false" mouseTransparent="true" onAction="#start" prefHeight="49.0" prefWidth="136.0" style="-fx-background-color: linear-gradient(#ffd65b, #e68400),        linear-gradient(#ffef84, #f2ba44),        linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));;" text="START" wrapText="true" AnchorPane.leftAnchor="132.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="120.0">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button layoutX="130.0" layoutY="190.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="136.0" style="-fx-background-color: linear-gradient(#ffd65b, #e68400),        linear-gradient(#ffef84, #f2ba44),        linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));;" text="SETTINGS" AnchorPane.leftAnchor="132.0" AnchorPane.rightAnchor="132.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
+      <Button layoutX="130.0" layoutY="260.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="136.0" style="-fx-background-color: linear-gradient(#ffd65b, #e68400),        linear-gradient(#ffef84, #f2ba44),        linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));;" text="EXIT">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
+   </children>
+</AnchorPane>

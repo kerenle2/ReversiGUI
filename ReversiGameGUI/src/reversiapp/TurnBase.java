@@ -44,17 +44,20 @@ public class TurnBase {
 			this.change_player();
 			current_player(this.current_turn_player).get_possible_moves(board_controller.getBoard(), this.moves_calculator);
 			if ((players.get(0).getNomoves() || players.get(1).getNomoves() || board_controller.isFull())) {
+				board_controller.setGameEnded(true);
 				char winner = findWinner();
 				if (winner == 'T') {
 					Text tie = new Text("Tie! X & O have the same number of points");
 					tie.setFont(Font.font ("Verdana", 100));
 					tie.setFill(Color.RED);
 					board_controller.add(tie, board_controller.getBoardSize() / 2, board_controller.getBoardSize() / 2);
-					board_controller.draw();
 					System.out.println("Tie! X & O have the same number of points");
+					//System.exit(0);;
 				}
 				else {
 					System.out.println("the winner is: " + winner);
+					//System.exit(0);;
+
 				}
 			}
 			board_controller.draw();

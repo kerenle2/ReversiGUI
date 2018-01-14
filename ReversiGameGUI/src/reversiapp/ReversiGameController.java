@@ -6,9 +6,17 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.event.ActionEvent;
 
 public class ReversiGameController implements Initializable{
 	
@@ -17,7 +25,9 @@ public class ReversiGameController implements Initializable{
 	}
 	
 	@FXML
-	private HBox root;
+	private AnchorPane root;
+	@FXML
+	private Button start;
 	private int board_size;	 
 	private int[][]board;
 	//private Player[] players = new Player[2];
@@ -26,19 +36,34 @@ public class ReversiGameController implements Initializable{
 
 	@Override	
 	public void initialize(URL location, ResourceBundle resources) {
-		this.board_size = 4;
-		this.players = new ArrayList<Player>();
-//		//initialize the board
+
+		this.board_size = 3;
+	this.players = new ArrayList<Player>();
+
+		//initialize the board
 //		this.board = new int[board_size + 1][board_size + 1];
 //		for (int i = 0; i <= board_size; i++){
 //			for (int j = 0; j <= board_size; j++){
 //				this.board[i][j] = 0;
 //			}
 //		}
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReversiGame.fxml"));
+		fxmlLoader.setRoot(this);
+		fxmlLoader.setController(this);
+		root.setOnMouseClicked(event-> {this.start(event);});
+
+//		root.setOnKeyPressed(reversiBoard.getOnKeyPressed());
+	
+		
+
+	}
+	@FXML
+	public void start(MouseEvent event){
+
 
 		
 		ReversiBoardController reversiBoard = new ReversiBoardController(board_size);
-		root.setOnKeyPressed(reversiBoard.getOnKeyPressed());
+	//	root.setOnKeyPressed(reversiBoard.getOnKeyPressed());
 		
 		
 		reversiBoard.setPoint(new Point(board_size/2 -1, board_size/2 - 1, 'O'));
@@ -48,12 +73,11 @@ public class ReversiGameController implements Initializable{
 		
 		reversiBoard.setPrefWidth(400);
 		reversiBoard.setPrefHeight(400);
-		
-		root.getChildren().add(0, reversiBoard);
-		reversiBoard.draw();
+		root.getChildren().add( reversiBoard);
+	
 		//to handle window resize
 		root.widthProperty().addListener((observable, oldValue, newValue) -> {
-			double boardNewWidth = newValue.doubleValue() - 120;
+			double boardNewWidth = newValue.doubleValue();
 			reversiBoard.setPrefWidth(boardNewWidth);
 			reversiBoard.draw();
 			});
@@ -72,8 +96,9 @@ public class ReversiGameController implements Initializable{
 			//initialize first turn possible moves:
 			black.get_possible_moves(reversiBoard.getBoard(), turn_base.getMovesCalculator());
 			
-		
+			reversiBoard.draw();
 	}
+
 	
 	public static void handlePointClick(Button move) {
 		String[] rowAndCol = move.getId().split(",");
@@ -83,5 +108,6 @@ public class ReversiGameController implements Initializable{
 		turn_base.play_game(chosen_point);
 	}
 	
+
 
 }
