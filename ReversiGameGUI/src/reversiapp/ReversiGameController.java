@@ -75,37 +75,12 @@ public class ReversiGameController implements Initializable{
 	}
 	
 	public static void handlePointClick(Button move) {
-		System.out.print(move.getId()); //delete later
 		String[] rowAndCol = move.getId().split(",");
-	int row = Integer.parseInt(rowAndCol[0]);	
-	int col = Integer.parseInt(rowAndCol[1]);
-	Point chosen_point = new Point(row, col,' ');
-	turn_base.run(chosen_point);
+		int row = Integer.parseInt(rowAndCol[0]);	
+		int col = Integer.parseInt(rowAndCol[1]);
+		Point chosen_point = new Point(row, col,' ');
+		turn_base.play_game(chosen_point);
 	}
 	
-//	public void run() {
-//		turn_base.play_game();
-//	//	cout << "GAME IS OVER!" << endl << "THE WINNER IS: ";
-//
-//		char winner = findWinner(turn_base);
-//		if (winner == 'T') {
-//		//	cout << "Tie! X & O have the same number of points";
-//		}
-//		else {
-//		//	cout << winner << endl;
-//		}
-//	}
-//	
-//	
-//	
-//	
-//	private char findWinner(TurnBase turn_base) {
-//		if (turn_base.getBoard().getCounter().getBlackCount() > turn_base.getBoard().getCounter().getWhiteCount()) {
-//			return 'X';
-//		}
-//		if (turn_base.getBoard().getCounter().getBlackCount() < turn_base.getBoard().getCounter().getWhiteCount()) {
-//			return 'O';
-//		}
-//		return 'T';
-//	}
+
 }

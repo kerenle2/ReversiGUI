@@ -6,10 +6,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public class Player {
-	private GridPane grid;
-	private int row;
-	private int col;
-	private ImageView iv;
 	private char sign;
 	private boolean no_moves;
 	

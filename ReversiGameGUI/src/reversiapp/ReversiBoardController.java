@@ -150,6 +150,9 @@ public class ReversiBoardController extends GridPane{
 			Button move = new Button();
 			move.setPrefWidth(cellWidth);
 			move.setPrefHeight(cellWidth);
+
+			String s ="<ColorInput" + "{paint=}" + "#eb25e4" + "/>"; //it doesn't work yet!!! trying to add colors to button to each player moves
+			move.setStyle(s);
 			this.add(move, board.getPossibleMoves().get(i).get_col(), board.getPossibleMoves().get(i).get_row());
 			String row = String.valueOf(board.getPossibleMoves().get(i).get_row());
 			row = row.concat(",");

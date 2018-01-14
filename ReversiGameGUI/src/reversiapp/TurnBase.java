@@ -39,6 +39,15 @@ public class TurnBase {
 			fliper.flip(board_controller.getBoard(), chosen_point, chosen_point.get_sign());
 			this.change_player();
 			current_player(this.current_turn_player).get_possible_moves(board_controller.getBoard(), this.moves_calculator);
+			if ((players.get(0).getNomoves() || players.get(1).getNomoves() || board_controller.isFull())) {
+				char winner = findWinner();
+				if (winner == 'T') {
+					System.out.println("Tie! X & O have the same number of points");
+				}
+				else {
+					System.out.println("the winner is: " + winner);
+				}
+			}
 			board_controller.draw();
 
 			//this->console.printCounter(board.getCounter());
