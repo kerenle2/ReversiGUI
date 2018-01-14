@@ -1,6 +1,10 @@
 package reversiapp;
 import java.util.ArrayList;
 
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+
 public class TurnBase {
 
 	//class members
@@ -42,6 +46,11 @@ public class TurnBase {
 			if ((players.get(0).getNomoves() || players.get(1).getNomoves() || board_controller.isFull())) {
 				char winner = findWinner();
 				if (winner == 'T') {
+					Text tie = new Text("Tie! X & O have the same number of points");
+					tie.setFont(Font.font ("Verdana", 100));
+					tie.setFill(Color.RED);
+					board_controller.add(tie, board_controller.getBoardSize() / 2, board_controller.getBoardSize() / 2);
+					board_controller.draw();
 					System.out.println("Tie! X & O have the same number of points");
 				}
 				else {

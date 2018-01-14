@@ -42,37 +42,7 @@ public class ReversiBoardController extends GridPane{
 		fxmlLoader.setController(this);
 		this.fxmlLoader = fxmlLoader;
 		
-		
-//moves this part to board
-//		for (int i = 0; i < this.board_size; i++) {
-//			for (int j = 0; j < this.board_size; j++) {
-//				all_players_list[i][j] = new Point(i, j, ' ');
-//			}
-//		}
 
-//		try{
-//			fxmlLoader.load();
-//			this.setOnKeyPressed(event -> {
-//				switch (event.getCode()) {
-//				case DOWN:
-//				black_player.moveDown();
-//				break;
-//				case UP:
-//				black_player.moveUp();
-//				break;
-//				case LEFT:
-//					black_player.moveLeft();
-//				break;
-//				case RIGHT:
-//					black_player.moveRight();
-//				break;
-//				}
-//				event.consume();
-//			});
-//			
-//		} catch (IOException e) {
-//			throw new RuntimeException(e);
-//		}
 	}
 	int width = (int)this.getPrefWidth();
 	
@@ -130,14 +100,8 @@ public class ReversiBoardController extends GridPane{
 		//draw all players
 		for (int i = 0; i < board_size; i++) {
 			for (int j = 0; j < board_size; j++) {
-				if (board.getAllPointsList()[i][j].get_sign() == 'X'){
+				if (board.getAllPointsList()[i][j].get_sign() == 'X' || board.getAllPointsList()[i][j].get_sign() == 'O'){
 					//Circle player = new Circle(cellWidth/2.5, Color.BLACK);
-					Node n = board.getAllPointsList()[i][j].draw(cellWidth);
-					this.add(n, j, i);
-				}
-				
-				else if(board.getAllPointsList()[i][j].get_sign() == 'O'){
-				//	Circle player = new Circle(cellWidth/2.5, Color.WHITE);
 					Node n = board.getAllPointsList()[i][j].draw(cellWidth);
 					this.add(n, j, i);
 				}

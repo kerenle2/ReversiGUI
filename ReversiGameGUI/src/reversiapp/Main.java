@@ -17,7 +17,6 @@ public class Main extends Application {
 			primaryStage.setTitle("Reversi Game");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-
 		} catch(Exception e) {
 			
 			e.printStackTrace();

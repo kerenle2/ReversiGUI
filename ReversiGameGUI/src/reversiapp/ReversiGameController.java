@@ -1,5 +1,6 @@
 package reversiapp;
 
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -25,7 +26,7 @@ public class ReversiGameController implements Initializable{
 
 	@Override	
 	public void initialize(URL location, ResourceBundle resources) {
-		this.board_size = 8;
+		this.board_size = 4;
 		this.players = new ArrayList<Player>();
 //		//initialize the board
 //		this.board = new int[board_size + 1][board_size + 1];
