@@ -22,8 +22,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -83,7 +81,7 @@ public class Settings extends GridPane {
 	
 	public void continueButton(TextField size, TextField first, TextField second) {
 		getSettingsFromUser(size, first, second);
-		return;
+		SceneManager.changeScene("menu");
 	}
 	
 

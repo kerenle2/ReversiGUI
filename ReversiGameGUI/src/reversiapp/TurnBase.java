@@ -65,8 +65,9 @@ public class TurnBase {
 			if (((players.get(0).getNomoves() && players.get(1).getNomoves()) || board_controller.isFull())) {
 			//	board_controller.setGameEnded(true);
 				printWinner();
+				SceneManager.changeScene("menu");
 			}
-			
+
 		}		
 
 	}
