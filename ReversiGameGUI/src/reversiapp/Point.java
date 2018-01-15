@@ -1,5 +1,6 @@
 package reversiapp;
 
+import javafx.scene.Group;
 import java.lang.reflect.Field;
 
 import javafx.scene.Node;
@@ -7,8 +8,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-//import java.awt.Color;
-import java.awt.color.*;
+
 
 public class Point {
 	private int row,col;
@@ -52,14 +52,62 @@ public class Point {
 	public void set_sign(char sign) {
 		this.sign = sign;
 	}
+
+	
+	public Node draw(int cellWidth) {
+		if (this.sign == 'X') {
+			Group group = new Group();
+			
+			Circle upper = new Circle(cellWidth/2.5, Color.WHITE);
+			upper.setLayoutY(cellWidth/2.5 - 17);
+			group.getChildren().add(upper);
+			Circle lower = new Circle(cellWidth/2.5, Color.BLACK);
+			group.getChildren().add(lower);
+			return group;
+
+
+		}
+		else if (this.sign == 'O') {
+			Group group = new Group();
+			Circle upper = new Circle(cellWidth/2.5, Color.BLACK);
+			upper.setLayoutY(cellWidth/2.5 - 17);
+			group.getChildren().add(upper);
+			Circle lower = new Circle(cellWidth/2.5, Color.WHITE);
+			group.getChildren().add(lower);
+			return group;
+		}
+		
+		else return null;
+	}
+	
 	public Color getColor(String color){
 		 String str = color.toLowerCase();
 		 Color color_tmp = Color.valueOf(str);
 		 return color_tmp;
 	}
+	
 	public Node draw(int cellWidth, String color) {
 		Color color_tmp = getColor(color);
 		Circle player = new Circle(cellWidth/2.5, color_tmp);
 		return player;
 	}
+	
+	public Node draw(int cellWidth, String this_player_color, String opponent_color) {
+		Color upper_color = getColor(this_player_color);
+		Color lower_color = getColor(opponent_color);		
+		Group group = new Group();
+		
+		Circle lower = new Circle(cellWidth/2.5, lower_color);
+		group.getChildren().add(lower);
+
+		Circle upper = new Circle(cellWidth/2.5, upper_color);
+		upper.setLayoutY(cellWidth/2.5 - cellWidth / 2.3);
+		group.getChildren().add(upper);
+
+		return group;
+		
+		
+		
+	}
+	
 }
