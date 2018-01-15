@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -31,7 +32,7 @@ public class ReversiGameController implements Initializable{
 	}
 	
 	@FXML
-	private AnchorPane root;
+	private static AnchorPane root;
 	@FXML
 	private Button start = new Button();
 	@FXML
@@ -45,6 +46,8 @@ public class ReversiGameController implements Initializable{
 	private Settings game_settings;
 	private ArrayList<Player> players;
 	private static TurnBase turn_base;
+	private Scene start_scene, settings_scene;
+//	private static Stage start_stage;
 
 
 	@Override	
@@ -80,7 +83,12 @@ public class ReversiGameController implements Initializable{
 		else return null; //there is an error
 	}
 	
-
+	Scene getStartScene(){
+		return this.start_scene;
+	}
+	Scene getSettingsScene(){
+		return this.settings_scene;
+	}
 	@FXML
 	public void start(ActionEvent event){
 		Player first = new Player('X');
@@ -88,7 +96,13 @@ public class ReversiGameController implements Initializable{
 		players.add(first);
 		players.add(second);
 		
-		this.root.getChildren().clear();
+//		this.root.getChildren().clear();
+		AnchorPane anc = new AnchorPane();
+		ReversiGameController.root = anc;
+		this.start_scene = new Scene(ReversiGameController.root,600,400);
+//		ReversiGameController.start_stage = new Stage();
+//		Main.primaryStage.setScene(start_scene);
+//		Main.primaryStage.show();
 		ImageView iv = new
 				ImageView(getClass().getResource("wood.jpeg").toExternalForm());
 		iv.setFitHeight(this.window_height);
@@ -128,12 +142,17 @@ public class ReversiGameController implements Initializable{
 		
 	@FXML
 	public void settings(ActionEvent event){
-		this.root.getChildren().clear();
+		AnchorPane anc = new AnchorPane();
+		ReversiGameController.root = anc;
+//		this.start_scene = new Scene(this.root,600,400);
+		this.settings_scene = new Scene(root, 600, 400);
+//		Main.primaryStage.setScene(start_scene);
+//		ReversiGameController.start_stage.show();
 		ImageView iv = new
 				ImageView(getClass().getResource("wood.jpeg").toExternalForm());
 		iv.setFitHeight(this.window_height);
 		iv.setFitWidth(this.window_width);
-		this.root.getChildren().add(iv);
+		ReversiGameController.root.getChildren().add(iv);
 		this.game_settings.setPadding(new Insets(50));
 
 		root.getChildren().add(this.game_settings);
@@ -147,7 +166,15 @@ public class ReversiGameController implements Initializable{
 		int col = Integer.parseInt(rowAndCol[1]);
 		Point chosen_point = new Point(row, col,' ');
 		turn_base.play_game(chosen_point);
+//		if (turn_base.end_game){
+//			ReversiGameController.endGame();
+//		}
+		
 	}
+//	public static void endGame(){
+//		Main.primaryStage.setScene(Main.scene);
+//		
+//	}
 	
 	
 	

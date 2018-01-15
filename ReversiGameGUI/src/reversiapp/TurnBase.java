@@ -17,6 +17,7 @@ public class TurnBase {
 	char current_turn_player;
 	Fliper fliper;
 	MovesCalculator moves_calculator;
+	boolean end_game = false;
 	
 	/**
 	 * constructor
@@ -54,7 +55,10 @@ public class TurnBase {
 			if ((players.get(0).getNomoves() || players.get(1).getNomoves() || board_controller.isFull())) {
 			//	board_controller.setGameEnded(true);
 				printWinner();
-			}
+				
+				this.end_game = true;
+				return ;
+				}
 			
 
 
