@@ -50,7 +50,6 @@ public class ReversiGameController implements Initializable{
 	@Override	
 	public void initialize(URL location, ResourceBundle resources) {
 
-//		this.board_size = 3;
 		this.game_settings = new Settings();
 		this.players = new ArrayList<Player>();
 		this.board_size = this.game_settings.getBoardSize();

@@ -34,7 +34,7 @@ public class Settings extends GridPane {
 
 	
 	public Settings() {
-		this.writeToTextFile("8", "black", "white");
+		this.writeToTextFile("4", "black", "white");
 		this.readFromTextFile();
 	}
 	
@@ -86,16 +86,33 @@ public class Settings extends GridPane {
 		return;
 	}
 	
+
+	
 	
 	public void getSettingsFromUser(TextField size, TextField first, TextField second) {
 		String board_size = size.getText();
+		if (board_size.equals("")) {
+			board_size = "8";
+		}
 		int sizeInt = Integer.parseInt(board_size);
 		if (sizeInt < 4 || sizeInt > 20) {
 			Alert alert = new Alert(AlertType.ERROR, "invalid board size. please type again", ButtonType.OK);
 			alert.showAndWait();
 		}
 		String first_color = first.getText();
+		first_color = first_color.toLowerCase();
+		if (first_color.equals("")) {
+			first_color = "black";
+		}
 		String second_color = second.getText();
+		second_color = second_color.toLowerCase();
+		if(second_color.equals("")) {
+			second_color = "white";
+		}
+		if (second_color.equals(first_color)) {
+			Alert alert = new Alert(AlertType.ERROR, "two colors are the same! please type again", ButtonType.OK);
+			alert.showAndWait();
+		}
 		writeToTextFile(board_size, first_color, second_color);
 		readFromTextFile();
 	}
@@ -108,7 +125,7 @@ public class Settings extends GridPane {
 	public String getColor1(){
 		return this.first_color;
 	}
-	
+
 	
 	public String getColor2(){
 		return this.second_color;

@@ -2,6 +2,7 @@ package reversiapp;
 import java.util.ArrayList;
 
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -27,7 +28,7 @@ public class TurnBase {
 		this.spriets = spriets;
 		this.players = players;
 		this.fliper = new Fliper();
-		this.current_turn_player = 'O';
+		this.current_turn_player = 'X';
 		this.moves_calculator = new MovesCalculator();
 	}
 
@@ -46,7 +47,16 @@ public class TurnBase {
 			fliper.flip(board_controller.getBoard(), chosen_point, chosen_point.get_sign());
 			this.change_player();
 			current_player(this.current_turn_player).get_possible_moves(board_controller.getBoard(), this.moves_calculator);
-			if ((players.get(0).getNomoves() || players.get(1).getNomoves() || board_controller.isFull())) {
+			if(current_player(this.current_turn_player).getNomoves()) {
+				System.out.println(current_turn_player + " has no possible moves.");
+				notifyNoMoves();
+				change_player();
+				current_player(this.current_turn_player).get_possible_moves(board_controller.getBoard(), this.moves_calculator);
+			//	spriets.draw(this.current_turn_player);
+				board_controller.draw();
+				
+			}
+			if (((players.get(0).getNomoves() && players.get(1).getNomoves()) || board_controller.isFull())) {
 			//	board_controller.setGameEnded(true);
 				char winner = findWinner();
 				if (winner == 'T') {
@@ -78,6 +88,16 @@ public class TurnBase {
 		}
 
 	}
+	
+	
+	public void notifyNoMoves() {
+		Text text = new Text(current_player(current_turn_player).getColor() + " has no possible moves");
+		text.setFont(Font.font(15));
+		text.setFill(Color.DARKVIOLET);
+		this.spriets.addNode(text);
+	}
+	
+	
 	private  Player current_player(char sign) {
 		if (sign == 'X') {
 				return this.players.get(0);
@@ -99,18 +119,6 @@ public class TurnBase {
 		return this.board_controller.getBoard();
 	}
 	
-	public void run(Point chosen_point) {
-		play_game(chosen_point);
-	//	cout << "GAME IS OVER!" << endl << "THE WINNER IS: ";
-
-		char winner = findWinner();
-		if (winner == 'T') {
-		//	cout << "Tie! X & O have the same number of points";
-		}
-		else {
-		//	cout << winner << endl;
-		}
-	}
 	
 	public void play_next_step(ReversiBoardController board, Point chosen_step) {
 		board.setPoint(chosen_step);
