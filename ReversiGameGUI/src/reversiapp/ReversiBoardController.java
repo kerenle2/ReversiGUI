@@ -16,22 +16,21 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+
 import reversiapp.Point;
 
 
-public class ReversiBoardController extends GridPane{
+public class ReversiBoardController extends GridPane {
 	Board board;
 	TurnBase turn_base;
 	private FXMLLoader fxmlLoader;
 	private int board_size;
 	private boolean game_ended;
-	
-	public ReversiBoardController(int board_size){
+	private Settings game_settings;
 
+	public ReversiBoardController(int board_size, Settings game_settings){
+		this.game_settings = game_settings;
 		this.game_ended = false;
 		this.board_size = board_size;
 		this.board = new Board(board_size);
@@ -40,25 +39,30 @@ public class ReversiBoardController extends GridPane{
 		fxmlLoader.setController(this);
 		this.fxmlLoader = fxmlLoader;
 
-
-}
-
-	
+	}
 
 	public int getBoardSize() {
 		return this.board_size;
 	}
 	
 	
-	private void drawPossibleMoves(ArrayList<Point> possible_moves, int cellWidth, int cellHeight) {
-		//IMPLEMENT HERE AND CALL FROM DRAW
-
+//	private void drawPossibleMoves(ArrayList<Point> possible_moves, int cellWidth, int cellHeight) {
+//		//IMPLEMENT HERE AND CALL FROM DRAW
+//
+//		}
+	
+	public String checkColor2(){
+		if (this.game_settings.getFirstPlayer() == this.game_settings.getColor1()){
+			return this.game_settings.getColor2();
 		}
-	
-	
+		else if (this.game_settings.getFirstPlayer() == this.game_settings.getColor2()){
+			return this.game_settings.getColor1();
+		}
+		else return null; //there is an error
+	}
 	public void draw(){
-	//	this.getChildren().clear();
-		 
+
+		this.getChildren().clear();
 		int height = (int)this.getPrefHeight();
 		int width = (int)this.getPrefWidth();
 		
@@ -75,10 +79,17 @@ public class ReversiBoardController extends GridPane{
 		
 
 		//draw all players
+		String first_player_color = game_settings.getFirstPlayer();
+		String second_player_color= checkColor2();
+		
 		for (int i = 0; i < board_size; i++) {
 			for (int j = 0; j < board_size; j++) {
-				if (board.getAllPointsList()[i][j].get_sign() == 'X' || board.getAllPointsList()[i][j].get_sign() == 'O'){
-					Node n = board.getAllPointsList()[i][j].draw(cellWidth);
+				if (board.getAllPointsList()[i][j].get_sign() == 'X'){
+					Node n = board.getAllPointsList()[i][j].draw(cellWidth, first_player_color, second_player_color);
+					this.add(n, j, i);
+				}
+				if ( board.getAllPointsList()[i][j].get_sign() == 'O'){
+					Node n = board.getAllPointsList()[i][j].draw(cellWidth, second_player_color, first_player_color);
 					this.add(n, j, i);
 				}
 

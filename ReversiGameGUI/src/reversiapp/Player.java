@@ -8,6 +8,8 @@ import javafx.scene.layout.GridPane;
 public class Player {
 	private char sign;
 	private boolean no_moves;
+	private String color;
+	private Settings settings;
 	
 //	public Player(GridPane grid, char sign) {
 //		this.grid = grid;
@@ -24,6 +26,13 @@ public class Player {
 	public Player(char sign) {
 		this.sign = sign;
 		this.no_moves = false;
+		this.settings = new Settings();
+		if (sign == 'X'){
+			this.color = settings.getColor1();
+		}
+		if (sign == 'O'){
+			this.color = settings.getColor2();
+		}
 
 	}
 	
@@ -53,6 +62,14 @@ public class Player {
 	public void set_sign(char sign){
 		this.sign = sign;
 	}
+
+
+	public String getColor() {
+		return this.color;
+	}
+//	public String getColor2() {
+//		return this.color2;
+//	}
 	
 	
 //	private boolean isAnOption(Point p, ArrayList<Point> options) {

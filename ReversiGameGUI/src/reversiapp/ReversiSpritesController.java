@@ -13,42 +13,42 @@ import java.util.*;
 
 public class ReversiSpritesController extends GridPane {
 		private PointsCounter counter;
+		private String first_player;
+		private String second_player;
 		private String current_player;
-		private String opp_player;
-
 		private Rectangle rec;
-		public ReversiSpritesController(PointsCounter counter,String current_player, String opp_player){
+		public ReversiSpritesController(PointsCounter counter,String first_player, String second_player){
 			this.counter = counter;
-			this.current_player = current_player;
-			this.opp_player = opp_player;
+			this.first_player = first_player;
+			this.second_player = second_player;
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReversiSprites.fxml"));
 			fxmlLoader.setRoot(this);
 			fxmlLoader.setController(this);
 		}
-		public void draw(){
+		
+		public void draw(char current_sign){
 			this.getChildren().clear();
 			
 			int h = (int)this.getPrefHeight();
 			int w = (int)this.getPrefWidth();
-//			this.rec = new  Rectangle(w, h);
-//			rec.setFill(Color.WHITE);
-//			this.add(rec, 0, 0);
-			VBox vbox = new VBox();
-			this.getChildren().add(vbox);
-			Text current = new Text("Current Player: " + this.current_player);
-			Text counterPlayer1 = new Text(current_player + " player score: " + String.valueOf(2));
-			Text counterPlayer2 = new Text(opp_player + " player score: " + String.valueOf(4));
-			
-//			String first_counter =  ;
-//			String second_counter = ;
 
-//			counterPlayer1.setText(first_counter);
+			VBox vbox = new VBox(20);
+			this.getChildren().add(vbox);
+			if (current_sign == 'X'){
+				this.current_player = this.first_player;
+
+			}
+			else if (current_sign == 'O'){
+				this.current_player = this.second_player;
+			}
+			Text current = new Text("Current Player: " + this.current_player);
+			Text counterPlayer1 = new Text(this.first_player + " player score: " + String.valueOf(this.counter.getBlackCount()));
+			Text counterPlayer2 = new Text(this.second_player + " player score: " + String.valueOf(this.counter.getWhiteCount()));
+
 			counterPlayer1.setFont(Font.font(18));
-//			counterPlayer2.setText(second_counter);
 			counterPlayer2.setFont(Font.font(18));
 			current.setFont(Font.font(18));
 
-//			counterPlayer1.setTextAlignment(TextAlignment.JUSTIFY);
 			vbox.getChildren().add(current);
 			vbox.getChildren().add(counterPlayer1);
 			vbox.getChildren().add(counterPlayer2);
