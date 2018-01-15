@@ -2,6 +2,7 @@ package reversiapp;
 import java.util.ArrayList;
 
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
@@ -48,34 +49,39 @@ public class TurnBase {
 			}
 			fliper.flip(board_controller.getBoard(), chosen_point, chosen_point.get_sign());
 			this.change_player();
-			
+			//calc moves:
 			current_player(this.current_turn_player).get_possible_moves(board_controller.getBoard(), this.moves_calculator);
+			//if there is no move - notify and hange player
+			if(current_player(this.current_turn_player).getNomoves()) {
+				System.out.println(current_turn_player + " has no possible moves.");
+				notifyNoMoves();
+				change_player();
+				current_player(this.current_turn_player).get_possible_moves(board_controller.getBoard(), this.moves_calculator);
+			//	spriets.draw(this.current_turn_player);
+				board_controller.draw();	
+			}
+			
 			board_controller.draw();
 			spriets.draw(this.current_turn_player);
-			if ((players.get(0).getNomoves() || players.get(1).getNomoves() || board_controller.isFull())) {
+			if (((players.get(0).getNomoves() && players.get(1).getNomoves()) || board_controller.isFull())) {
 			//	board_controller.setGameEnded(true);
 				printWinner();
-				
+				board_controller.setGameEnded(true);
 				this.end_game = true;
-				return ;
-				}
-			
-
-
-			//this->console.printCounter(board.getCounter());
-		} else {
-			board_controller.setGameEnded(true);
-
-			String winner = findWinner();
-			if (winner == "TIE") {
-			//	cout << "Tie! X & O have the same number of points";
+//				SceneManager.changeScene("menu");
 			}
-			else {
-			//	cout << winner << endl;
-			}
-		}
+
+		}		
 
 	}
+
+	public void notifyNoMoves() {
+		Text text = new Text(current_player(current_turn_player).getColor() + " has no possible moves");
+		text.setFont(Font.font(15));
+		text.setFill(Color.DARKVIOLET);
+		this.spriets.addNode(text);
+	}
+	
 	private void printWinner(){
 		String winner = findWinner();
 		if (winner == "TIE") {
@@ -100,6 +106,8 @@ public class TurnBase {
 			alert.showAndWait();
 		}
 	}
+	
+
 	private  Player current_player(char sign) {
 		if (sign == 'X') {
 				return this.players.get(0);
@@ -121,18 +129,7 @@ public class TurnBase {
 		return this.board_controller.getBoard();
 	}
 	
-	public void run(Point chosen_point) {
-		play_game(chosen_point);
-	//	cout << "GAME IS OVER!" << endl << "THE WINNER IS: ";
 
-		String winner = findWinner();
-		if (winner == "TIE") {
-		//	cout << "Tie! X & O have the same number of points";
-		}
-		else {
-		//	cout << winner << endl;
-		}
-	}
 	
 	public void play_next_step(ReversiBoardController board, Point chosen_step) {
 		board.setPoint(chosen_step);

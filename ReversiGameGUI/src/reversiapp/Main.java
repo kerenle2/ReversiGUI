@@ -19,21 +19,22 @@ import javafx.geometry.Insets;
 
 
 public class Main extends Application {
-	Stage primaryStage;
+	static Stage primaryStage;
 	AnchorPane root;
+	static Scene mene_scene;
 
 	private int window_width, window_height;
 
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage1) {
 		try {
-			this.primaryStage = primaryStage;			
+			primaryStage = primaryStage1;			
 			root = (AnchorPane)FXMLLoader.load(getClass().getResource("ReversiGame.fxml"));
-			Scene scene = new Scene(root,600,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			mene_scene = new Scene(root,600,400);
+			mene_scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setTitle("Reversi Game");
-			primaryStage.setScene(scene);
+			primaryStage.setScene(mene_scene);
 			primaryStage.show();
 
 			
@@ -42,7 +43,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+//	public Scene getMenuScene()
 	public static void main(String[] args) {
 		launch(args);
 

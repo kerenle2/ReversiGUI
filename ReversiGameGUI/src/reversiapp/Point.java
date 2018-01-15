@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.paint.Paint;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 
 
@@ -94,20 +95,17 @@ public class Point {
 	
 	public Node draw(int cellWidth, String this_player_color, String opponent_color) {
 		Color upper_color = getColor(this_player_color);
-		Color lower_color = getColor(opponent_color);		
-		Group group = new Group();
+		Color lower_color = getColor(opponent_color);	
 		
+		Group group = new Group();
 		Circle lower = new Circle(cellWidth/2.5, lower_color);
 		group.getChildren().add(lower);
-
 		Circle upper = new Circle(cellWidth/2.5, upper_color);
 		upper.setLayoutY(cellWidth/2.5 - cellWidth / 2.3);
 		group.getChildren().add(upper);
 
 		return group;
-		
-		
-		
+
 	}
-	
+
 }

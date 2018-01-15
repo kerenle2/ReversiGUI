@@ -1,14 +1,8 @@
 package reversiapp;
 
-import java.awt.event.ActionEvent;
-import java.awt.print.Printable;
-import java.io.IOException;
+
+
 import java.util.ArrayList;
-
-import javax.management.RuntimeErrorException;
-
-import javafx.event.EventHandler;
-//import com.sun.javafx.geom.Rectangle;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
@@ -23,12 +17,13 @@ import reversiapp.Point;
 
 
 public class ReversiBoardController extends GridPane {
-	Board board;
-	TurnBase turn_base;
+	private Board board;
+//	private TurnBase turn_base;
 	private FXMLLoader fxmlLoader;
 	private int board_size;
 	private boolean game_ended;
 	private Settings game_settings;
+	
 
 	public ReversiBoardController(int board_size, Settings game_settings){
 		this.game_settings = game_settings;
@@ -47,11 +42,6 @@ public class ReversiBoardController extends GridPane {
 	}
 	
 	
-//	private void drawPossibleMoves(ArrayList<Point> possible_moves, int cellWidth, int cellHeight) {
-//		//IMPLEMENT HERE AND CALL FROM DRAW
-//
-//		}
-	
 	public String checkColor2(){
 		if (this.game_settings.getFirstPlayer() == this.game_settings.getColor1()){
 			return this.game_settings.getColor2();
@@ -61,6 +51,8 @@ public class ReversiBoardController extends GridPane {
 		}
 		else return null; //there is an error
 	}
+	
+
 	public void draw(){
 
 		this.getChildren().clear();
@@ -70,6 +62,7 @@ public class ReversiBoardController extends GridPane {
 		int cellHeight = height / board_size;
 		int cellWidth = width / board_size;
 		
+		//draw all cells
 		for (int i = 0; i < board_size; i++) {
 			for (int j = 0; j < board_size; j++) {
 					Rectangle rec = new Rectangle(cellWidth, cellHeight, Color.BURLYWOOD);
@@ -97,8 +90,6 @@ public class ReversiBoardController extends GridPane {
 					GridPane.setValignment(n, VPos.CENTER);
 					this.add(n, j, i);
 				}
-
-//				else continue;
 			}
 		}
 
@@ -118,10 +109,16 @@ public class ReversiBoardController extends GridPane {
 			move.setId(id);
 			move.setOnAction(event-> {
 				ReversiGameController.handlePointClick(move);
-			});
-		}
-		}
+				if (game_ended){
+					Main.primaryStage.setScene(Main.mene_scene);
 
+				}
+			});
+			
+		}
+		
+
+		} 
 	} //end of draw funtion
 		 
 	public void setPoint(Point p){
@@ -141,5 +138,7 @@ public class ReversiBoardController extends GridPane {
 		return this.board.isFull();
 
 	}
+	
+
 	
 }
