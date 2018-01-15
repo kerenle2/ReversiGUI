@@ -24,10 +24,10 @@ public class Settings extends GridPane {
 	
 	public Settings() {
 		//deleteeeeeeeeeeeeeeeeeeeee
-		this.color1 = "blue";
-		this.color2 = "white";
-		this.first_player = "white";
-		this.board_size = 8;
+		this.color1 = "RED";
+		this.color2 = "blue";
+		this.first_player = "RED";
+		this.board_size = 4;
 		/////////////////////////////
 	}
 	public void draw() {
