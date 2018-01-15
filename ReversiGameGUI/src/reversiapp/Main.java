@@ -21,15 +21,9 @@ import javafx.geometry.Insets;
 public class Main extends Application {
 	Stage primaryStage;
 	AnchorPane root;
-//	Scene menu;
-//	Scene settings;
+
 	private int window_width, window_height;
-//
-//	private Button start = new Button();
-//	@FXML
-//	private Button exit = new Button();
-//	@FXML 
-//	private Button settings_btn = new Button();
+
 
 	@Override
 	public void start(Stage primaryStage) {

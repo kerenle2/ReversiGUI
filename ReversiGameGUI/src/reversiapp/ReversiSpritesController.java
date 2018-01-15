@@ -31,7 +31,15 @@ public class ReversiSpritesController extends GridPane {
 			fxmlLoader.setRoot(this);
 			fxmlLoader.setController(this);
 		}
-		
+		public String getCurrentPlayer(){
+			return this.current_player;
+		}
+		public String getFirstPlayer(){
+			return this.first_player;
+		}
+		public String getSecondPlayer(){
+			return this.second_player;
+		}
 		public void draw(char current_sign){
 			this.getChildren().clear();
 			this.vbox.getChildren().clear();

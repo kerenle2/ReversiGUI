@@ -34,7 +34,7 @@ public class Settings extends GridPane {
 
 	
 	public Settings() {
-		this.writeToTextFile("4", "black", "white");
+		this.writeToTextFile("3", "black", "white");
 		this.readFromTextFile();
 	}
 	

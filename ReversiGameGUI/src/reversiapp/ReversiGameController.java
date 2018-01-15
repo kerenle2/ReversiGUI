@@ -55,6 +55,7 @@ public class ReversiGameController implements Initializable{
 		this.board_size = this.game_settings.getBoardSize();
 		this.window_width = 600;
 		this.window_height = 400;
+		
 	}
 
 	@FXML
@@ -96,6 +97,7 @@ public class ReversiGameController implements Initializable{
 		ReversiBoardController reversiBoard = new ReversiBoardController(board_size, game_settings);
 		ReversiSpritesController sprites = new ReversiSpritesController(reversiBoard.getBoard().getCounter(),
 				this.game_settings.getFirstPlayer(), checkColor2());
+		ReversiGameController.turn_base = new TurnBase(reversiBoard,sprites, players);
 		reversiBoard.setPoint(new Point(board_size/2 -1, board_size/2 - 1, 'O'));
 		reversiBoard.setPoint(new Point(board_size/2 + 1 - 1, board_size/2 + 1 - 1, 'O'));
 		reversiBoard.setPoint(new Point(board_size/2 - 1, board_size/2 + 1 - 1, 'X'));
@@ -113,31 +115,14 @@ public class ReversiGameController implements Initializable{
 
 		//the first draw
 		reversiBoard.draw();
-		sprites.draw('X');
-	
-		root.widthProperty().addListener((observable, oldValue, newValue) -> {
-			double spritesNewWidth = newValue.doubleValue();
-			sprites.setPrefWidth(spritesNewWidth);
-			sprites.draw('X');
-			double boardNewWidth = newValue.doubleValue();
-			reversiBoard.setPrefWidth(boardNewWidth);
-			reversiBoard.draw();
-			});
 
-		root.heightProperty().addListener((observable, oldValue, newValue) -> {
-			sprites.setPrefHeight(newValue.doubleValue());
-			sprites.draw('X');
-			reversiBoard.setPrefHeight(newValue.doubleValue());
-			reversiBoard.draw();
-		});
-
-
-		this.turn_base = new TurnBase(reversiBoard,sprites, players);
 
 		//initialize first turn possible moves:
 		players.get(0).get_possible_moves(reversiBoard.getBoard(), turn_base.getMovesCalculator());
-		
+		sprites.draw('X');
 		reversiBoard.draw();
+		
+
 }
 		
 	@FXML

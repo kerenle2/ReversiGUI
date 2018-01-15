@@ -103,9 +103,9 @@ public class Point {
 		Circle upper = new Circle(cellWidth/2.5, upper_color);
 		upper.setLayoutY(cellWidth/2.5 - cellWidth / 2.3);
 		group.getChildren().add(upper);
+
 		return group;
-		
+
 	}
-	
-	
+
 }

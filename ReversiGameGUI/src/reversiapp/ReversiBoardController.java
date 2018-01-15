@@ -5,7 +5,8 @@ package reversiapp;
 import java.util.ArrayList;
 
 import javafx.fxml.FXMLLoader;
-
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -79,10 +80,14 @@ public class ReversiBoardController extends GridPane {
 			for (int j = 0; j < board_size; j++) {
 				if (board.getAllPointsList()[i][j].get_sign() == 'X'){
 					Node n = board.getAllPointsList()[i][j].draw(cellWidth, first_player_color, second_player_color);
+					GridPane.setHalignment(n, HPos.CENTER);
+					GridPane.setValignment(n, VPos.CENTER);
 					this.add(n, j, i);
 				}
 				if ( board.getAllPointsList()[i][j].get_sign() == 'O'){
 					Node n = board.getAllPointsList()[i][j].draw(cellWidth, second_player_color, first_player_color);
+					GridPane.setHalignment(n, HPos.CENTER);
+					GridPane.setValignment(n, VPos.CENTER);
 					this.add(n, j, i);
 				}
 			}
