@@ -9,6 +9,7 @@ public class TurnBase {
 
 	//class members
 	ReversiBoardController board_controller;
+	ReversiSpritesController spriets;
 	ArrayList<Player> players = new ArrayList<Player>();
 	char current_turn_player;
 	Fliper fliper;
@@ -20,8 +21,9 @@ public class TurnBase {
 
 
 
-	public TurnBase(ReversiBoardController board, ArrayList<Player> players) {
+	public TurnBase(ReversiBoardController board,ReversiSpritesController spriets, ArrayList<Player> players) {
 		this.board_controller = board;
+		this.spriets = spriets;
 		this.players = players;
 		this.fliper = new Fliper();
 		this.current_turn_player = 'X';
@@ -58,6 +60,7 @@ public class TurnBase {
 
 				}
 			}
+			spriets.draw(this.current_turn_player);
 			board_controller.draw();
 
 			//this->console.printCounter(board.getCounter());

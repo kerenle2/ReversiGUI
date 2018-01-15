@@ -19,11 +19,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Settings extends GridPane {
-
+	private String first_player, color1, color2;
+	private int board_size;
+	
+	public Settings() {
+		//deleteeeeeeeeeeeeeeeeeeeee
+		this.color1 = "blue";
+		this.color2 = "white";
+		this.first_player = "white";
+		this.board_size = 8;
+		/////////////////////////////
+	}
 	public void draw() {
 		this.getChildren().clear();
-		
-		VBox vbox = new VBox();
+		VBox vbox = new VBox(20);
 		this.getChildren().add(vbox);
 		Text settings = new Text("Settings");
 		settings.setFont(new Font("System Bold", 30));
@@ -34,7 +43,18 @@ public class Settings extends GridPane {
 		vbox.getChildren().add(first_player);
 		
 	}
-
+	public String getFirstPlayer(){
+		return this.first_player;
+	}
+	public String getColor1(){
+		return this.color1;
+	}
+	public String getColor2(){
+		return this.color2;
+	}
+	public int getBoardSize(){
+		return this.board_size;
+	}
 	
 //	void readFromFile() throws IOException, IOException{
 //		try(BufferedReader br = new BufferedReader(new FileReader("file.txt"))) {

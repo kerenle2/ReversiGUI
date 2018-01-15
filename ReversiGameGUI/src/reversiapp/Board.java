@@ -11,6 +11,7 @@ public class Board {
 	private static char black_player = 'X';
 	private static char white_player = 'O';
 	private static char blank = ' ';
+//	private Settings game_settings;
 	
 	public Board() {
 		
@@ -21,6 +22,7 @@ public class Board {
 		this.possible_moves = new ArrayList<Point>();
 		this.all_points_list = new Point[board_size][board_size];
 		this.counter = new PointsCounter();
+//		this.game_settings = game_settings;
 		
 		//initialize all points to blank:
 		for (int i = 0; i < this.board_size; i++) {
@@ -28,8 +30,6 @@ public class Board {
 				all_points_list[i][j] = new Point(i, j, blank);
 			}
 		}
-		
-	
 	}
 	
 	public Point[][] getAllPointsList() {
@@ -42,6 +42,7 @@ public class Board {
 		int col = p.get_col();
 		char sign = p.get_sign();
 		this.all_points_list[row][col].set_sign(sign);
+		
 		if (p.get_sign() == 'X' || p.get_sign() == 'O') {
 			this.counter.add_one(sign);
 		}
