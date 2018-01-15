@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 //import com.sun.javafx.geom.Rectangle;
 
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -24,15 +25,13 @@ import reversiapp.Point;
 
 public class ReversiBoardController extends GridPane{
 	Board board;
-//	private int[][] board;
 	TurnBase turn_base;
 	private FXMLLoader fxmlLoader;
 	private int board_size;
 	private boolean game_ended;
 	
 	public ReversiBoardController(int board_size){
-		//this.board = board;
-	//	this.board_size = board.length;
+
 		this.game_ended = false;
 		this.board_size = board_size;
 		this.board = new Board(board_size);
@@ -40,11 +39,9 @@ public class ReversiBoardController extends GridPane{
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 		this.fxmlLoader = fxmlLoader;
-	}
-	
 
-	//int width = (int)this.getPrefWidth();
-	
+
+}
 
 	
 
@@ -68,10 +65,9 @@ public class ReversiBoardController extends GridPane{
 		int cellHeight = height / board_size;
 		int cellWidth = width / board_size;
 		
-		//draw board 
 		for (int i = 0; i < board_size; i++) {
 			for (int j = 0; j < board_size; j++) {
-					Rectangle rec = new Rectangle(cellWidth, cellHeight, Color.ANTIQUEWHITE);
+					Rectangle rec = new Rectangle(cellWidth, cellHeight, Color.BURLYWOOD);
 					rec.setStroke(Color.BLACK);
 					this.add(rec, j, i);
 			}
@@ -96,9 +92,8 @@ public class ReversiBoardController extends GridPane{
 			Button move = new Button();
 			move.setPrefWidth(cellWidth);
 			move.setPrefHeight(cellWidth);
-
-			String s ="<ColorInput" + "{paint=}" + "#eb25e4" + "/>"; //it doesn't work yet!!! trying to add colors to button to each player moves
-			move.setStyle(s);
+			//String gg = "-fx-background-color:         linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 80%, #eea10b 90%),        linear-gradient(from 0% 0% to 15% 50%, rgba(105,205,255,20.9), rgba(15,85,0,0));;";
+			//move.setStyle(gg);
 			this.add(move, board.getPossibleMoves().get(i).get_col(), board.getPossibleMoves().get(i).get_row());
 			String row = String.valueOf(board.getPossibleMoves().get(i).get_row());
 			row = row.concat(",");

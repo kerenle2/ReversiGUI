@@ -1,5 +1,6 @@
 package reversiapp;
 
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -18,19 +19,6 @@ public class Point {
 		this.col = col;
 		this.sign = sign;
 	}
-
-
-//	public void printRealValues() {
-//		cout << "(" << row << "," << col << ")";
-//	}
-//
-//	void Point::printValuesPlusOne() {
-//		cout << "(" << row + 1 << "," << col + 1 << ")";
-//	}
-
-//	void Point::printSign() {
-//		cout << this->sign;
-//	}
 
 	public int get_row() {
 		return this.row;
@@ -57,14 +45,25 @@ public class Point {
 	
 	public Node draw(int cellWidth) {
 		if (this.sign == 'X') {
-			Circle player = new Circle(cellWidth/2.5, Color.BLACK);
-			return player;
+			Group group = new Group();
+			
+			Circle upper = new Circle(cellWidth/2.5, Color.WHITE);
+			upper.setLayoutY(cellWidth/2.5 - 17);
+			group.getChildren().add(upper);
+			Circle lower = new Circle(cellWidth/2.5, Color.BLACK);
+			group.getChildren().add(lower);
+			return group;
 
 
 		}
 		else if (this.sign == 'O') {
-			Circle player = new Circle(cellWidth/2.5, Color.WHITE);
-			return player;
+			Group group = new Group();
+			Circle upper = new Circle(cellWidth/2.5, Color.BLACK);
+			upper.setLayoutY(cellWidth/2.5 - 17);
+			group.getChildren().add(upper);
+			Circle lower = new Circle(cellWidth/2.5, Color.WHITE);
+			group.getChildren().add(lower);
+			return group;
 		}
 		
 		else return null;

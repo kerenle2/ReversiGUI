@@ -25,7 +25,7 @@ public class TurnBase {
 		this.board_controller = board;
 		this.players = players;
 		this.fliper = new Fliper();
-		this.current_turn_player = 'X';
+		this.current_turn_player = 'O';
 		this.moves_calculator = new MovesCalculator();
 	}
 
