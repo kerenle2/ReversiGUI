@@ -1,4 +1,4 @@
-package reversiapp;
+package GUIRelated;
 
 
 import java.net.URL;
@@ -12,6 +12,11 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+//import reversiapp.Main;
+import reversiapp.Player;
+import reversiapp.Point;
+import reversiapp.Settings;
+import reversiapp.TurnBase;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -107,7 +112,7 @@ public class ReversiGameController implements Initializable{
 		ReversiBoardController reversiBoard = new ReversiBoardController(this.board_size, game_settings);
 		ReversiSpritesController sprites = new ReversiSpritesController(reversiBoard.getBoard().getCounter(),
 				this.game_settings.getFirstPlayer(), checkColor2());
-		ReversiGameController.turn_base = new TurnBase(reversiBoard,sprites, players);
+		ReversiGameController.turn_base = new TurnBase(reversiBoard, sprites, players);
 		reversiBoard.setPoint(new Point(board_size/2 -1, board_size/2 - 1, 'O'));
 		reversiBoard.setPoint(new Point(board_size/2 + 1 - 1, board_size/2 + 1 - 1, 'O'));
 		reversiBoard.setPoint(new Point(board_size/2 - 1, board_size/2 + 1 - 1, 'X'));

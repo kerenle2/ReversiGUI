@@ -1,6 +1,8 @@
 package reversiapp;
 import java.util.ArrayList;
 
+import GUIRelated.ReversiBoardController;
+import GUIRelated.ReversiSpritesController;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Alert;

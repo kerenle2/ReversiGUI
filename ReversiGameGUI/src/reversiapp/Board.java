@@ -58,7 +58,7 @@ public class Board {
 		return this.possible_moves;
 	}
 	
-	PointsCounter getCounter() {
+	public PointsCounter getCounter() {
 		return counter;
 	}
 	

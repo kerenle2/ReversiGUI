@@ -45,11 +45,11 @@ public class PointsCounter {
 		}
 	}
 	
-	int getBlackCount() {
+	public int getBlackCount() {
 		return black_count;
 	}
 
-	int getWhiteCount() {
+	public int getWhiteCount() {
 		return white_count;
 	}
 }
