@@ -4,6 +4,7 @@ import javafx.scene.Group;
 import java.lang.reflect.Field;
 
 import javafx.scene.Node;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Paint;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -82,10 +83,13 @@ public class Point {
 	}
 	
 	public Color getColor(String color){
-		 String str = color.toLowerCase();
-		 Color color_tmp = Color.valueOf(str);
+//		 String str = color.toLowerCase();
+		 Color color_tmp = Color.valueOf(color);
+		// ColorPicker c = 
 		 return color_tmp;
+		
 	}
+	
 	
 	public Node draw(int cellWidth, String color) {
 		Color color_tmp = getColor(color);
