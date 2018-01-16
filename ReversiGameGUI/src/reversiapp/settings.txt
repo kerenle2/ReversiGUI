@@ -1,4 +1,0 @@
-first: black
-color1: pink
-color2: black
-board_size: 6

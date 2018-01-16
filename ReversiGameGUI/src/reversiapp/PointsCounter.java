@@ -14,7 +14,10 @@ public class PointsCounter {
 	}
 
 
-
+	/**
+	 * increase the counter
+	 * @param sign
+	 */
 	public void add_one(char sign) {
 		if (sign == 'X') {
 			black_count++;
@@ -24,6 +27,10 @@ public class PointsCounter {
 		}
 	}
 
+	/**
+	 * decrease the counter
+	 * @param sign
+	 */
 	public void minus_one(char sign) {
 		if (sign == 'X') {
 			black_count--;
@@ -33,23 +40,39 @@ public class PointsCounter {
 		}
 	}
 
+	/**
+	 * add several points
+	 * @param how_much
+	 * @param sign
+	 */
 	public void add(int how_much, char sign) {
 		for (int i = 0; i < how_much; i++) {
 			add_one(sign);
 		}
 	}
 
+	/**
+	 * delete several points
+	 * @param how_much
+	 * @param sign
+	 */
 	public void minus(int how_much, char sign) {
 		for (int i = 0; i < how_much; i++) {
 			minus_one(sign);
 		}
 	}
-	
-	int getBlackCount() {
+	/**
+	 * get the first player counter
+	 * @return
+	 */
+	public int getBlackCount() {
 		return black_count;
 	}
-
-	int getWhiteCount() {
+	/**
+	 * get the second player counter
+	 * @return
+	 */
+	public int getWhiteCount() {
 		return white_count;
 	}
 }

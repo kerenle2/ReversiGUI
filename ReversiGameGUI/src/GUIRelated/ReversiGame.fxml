@@ -12,7 +12,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.event.ActionEvent?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reversiapp.ReversiGameController">
+
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIRelated.ReversiGameController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="651.0" opacity="0.92" pickOnBounds="true" preserveRatio="true">
          <image>

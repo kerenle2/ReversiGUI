@@ -8,8 +8,8 @@ public class Board {
 	private int board_size;
 	private ArrayList<Point> possible_moves;
 	private Point[][] all_points_list;
-	private static char black_player = 'X';
-	private static char white_player = 'O';
+//	private static char black_player = 'X';
+//	private static char white_player = 'O';
 	private static char blank = ' ';
 	
 	public Board() {
@@ -74,7 +74,7 @@ public class Board {
 	 * get the counter
 	 * @return
 	 */
-	PointsCounter getCounter() {
+	public PointsCounter getCounter() {
 		return counter;
 	}
 	
@@ -90,7 +90,7 @@ public class Board {
 	 * @return
 	 */
 	public char getBlank() {
-		return this.blank;
+		return blank;
 	}
 	/**
 	 * return true if the board is full, otherwise false.
@@ -101,6 +101,5 @@ public class Board {
 		return counter.getBlackCount() + counter.getWhiteCount() >= capacity;
 
 	}
-	
 	
 }

@@ -2,11 +2,7 @@ package reversiapp;
 
 import java.util.ArrayList;
 
-/**
- * 
- * Fliper
- *
- */
+
 public class Fliper {
 	private ArrayList<Point> points_to_flip = new ArrayList<Point>();
 	
@@ -26,7 +22,6 @@ public class Fliper {
 	*/
 	public int flip(Board board, Point chosen_point, char flip_to) {
 		this.points_to_flip.removeAll(this.points_to_flip);
-		ArrayList<Point> temp;
 		checkAndUpdateDown(chosen_point, board, flip_to);
 		checkAndUpdateUp(chosen_point, board, flip_to);
 		checkAndUpdateRight(chosen_point, board, flip_to);

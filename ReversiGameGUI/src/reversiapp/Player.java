@@ -2,14 +2,11 @@ package reversiapp;
 
 import java.util.ArrayList;
 
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 
 public class Player {
 	private char sign;
 	private boolean no_moves;
 	private int num;
-	private Settings settings;
 
 	/**
 	 * Constructor.
@@ -18,14 +15,12 @@ public class Player {
 	public Player(char sign) {
 		this.sign = sign;
 		this.no_moves = false;
-		this.settings = new Settings();
 		if (sign == 'X'){
 			this.num = 1;
 		}
 		if (sign == 'O'){
 			this.num = 2;
 		}
-
 	}
 	/**
 	 * return true if the player have no moves.
@@ -34,7 +29,6 @@ public class Player {
 	public boolean getNomoves() {
 		return this.no_moves;
 	}
-
 	/**
 	 * get the list of the possible moves.
 	 * @param board

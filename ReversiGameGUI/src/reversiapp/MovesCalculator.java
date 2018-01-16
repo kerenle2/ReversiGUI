@@ -1,14 +1,7 @@
-/**
- * 
- */
+
 package reversiapp;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-/**
- * @author efrat
- *
- */
 public class MovesCalculator {
 	private ArrayList<Point> options_list;
 	/**

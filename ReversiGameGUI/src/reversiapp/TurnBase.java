@@ -1,6 +1,8 @@
 package reversiapp;
 import java.util.ArrayList;
 
+import GUIRelated.ReversiBoardController;
+import GUIRelated.ReversiSpritesController;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Alert;
@@ -54,7 +56,6 @@ public class TurnBase {
 			current_player(this.current_turn_player).get_possible_moves(board_controller.getBoard(), this.moves_calculator);
 			//if there is no move - notify and hange player
 			if(current_player(this.current_turn_player).getNomoves()) {
-				System.out.println(current_turn_player + " has no possible moves.");
 				notifyNoMoves();
 				change_player();
 				current_player(this.current_turn_player).get_possible_moves(board_controller.getBoard(), this.moves_calculator);

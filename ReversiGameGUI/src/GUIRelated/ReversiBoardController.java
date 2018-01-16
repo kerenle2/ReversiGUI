@@ -1,7 +1,4 @@
-package reversiapp;
-
-
-
+package GUIRelated;
 
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -11,8 +8,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-
+import reversiapp.Board;
 import reversiapp.Point;
+import reversiapp.Settings;
 
 
 public class ReversiBoardController extends GridPane {
@@ -21,20 +19,30 @@ public class ReversiBoardController extends GridPane {
 	private boolean game_ended;
 	private Settings game_settings;
 	
-
+	/**
+	 * constructor.
+	 * @param board_size
+	 * @param game_settings
+	 */
 	public ReversiBoardController(int board_size, Settings game_settings){
 		this.game_settings = game_settings;
 		this.game_ended = false;
 		this.board_size = board_size;
 		this.board = new Board(board_size);
-
 	}
 
+	/**
+	 * get board size
+	 * @return
+	 */
 	public int getBoardSize() {
 		return this.board_size;
 	}
 	
-	
+	/**
+	 * check what is the color of the second player
+	 * @return
+	 */
 	public String checkColor2(){
 		if (this.game_settings.getFirstPlayer() == this.game_settings.getColor1()){
 			return this.game_settings.getColor2();
@@ -42,10 +50,12 @@ public class ReversiBoardController extends GridPane {
 		else if (this.game_settings.getFirstPlayer() == this.game_settings.getColor2()){
 			return this.game_settings.getColor1();
 		}
-		else return null; //there is an error
+		else return null; //if there is an error return null
 	}
 	
-
+	/**
+	 * draw the board
+	 */
 	public void draw(){
 
 		this.getChildren().clear();
@@ -58,7 +68,7 @@ public class ReversiBoardController extends GridPane {
 		//draw all cells
 		for (int i = 0; i < board_size; i++) {
 			for (int j = 0; j < board_size; j++) {
-					Rectangle rec = new Rectangle(cellWidth, cellHeight, Paint.valueOf("#F6C73C"));
+					Rectangle rec = new Rectangle(cellWidth, cellHeight, Paint.valueOf("#2D739A"));
 					rec.setStroke(Color.BLACK);
 					this.add(rec, j, i);
 			}
@@ -90,8 +100,6 @@ public class ReversiBoardController extends GridPane {
 			Button move = new Button();
 			move.setPrefWidth(cellWidth);
 			move.setPrefHeight(cellWidth);
-			//String gg = "-fx-background-color:         linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 80%, #eea10b 90%),        linear-gradient(from 0% 0% to 15% 50%, rgba(105,205,255,20.9), rgba(15,85,0,0));;";
-			//move.setStyle(gg);
 			this.add(move, board.getPossibleMoves().get(i).get_col(), board.getPossibleMoves().get(i).get_row());
 			String row = String.valueOf(board.getPossibleMoves().get(i).get_row());
 			row = row.concat(",");
@@ -110,26 +118,36 @@ public class ReversiBoardController extends GridPane {
 		
 
 		} 
-	} //end of draw funtion
-		 
+	} //end of draw function
+	
+	/**
+	 * set the move on the board
+	 * @param p
+	 */
 	public void setPoint(Point p){
 		this.board.setPoint(p);
 	}
-	
+	/**
+	 * get the board
+	 * @return
+	 */
 	public Board getBoard() {
 		return this.board;
 	}
-	
+	/**
+	 * return true if the game ended
+	 * @param TorF
+	 */
 	public void setGameEnded(boolean TorF) {
 		this.game_ended = TorF;
 		this.board.getPossibleMoves().removeAll(this.board.getPossibleMoves());
 	}
-	
+	/**
+	 * return true if the board is full
+	 * @return
+	 */
 	public boolean isFull() {
 		return this.board.isFull();
 
 	}
-	
-
-	
 }

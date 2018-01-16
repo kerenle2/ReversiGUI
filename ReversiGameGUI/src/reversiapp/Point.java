@@ -3,6 +3,7 @@ package reversiapp;
 import javafx.scene.Group;
 
 import javafx.scene.Node;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -74,9 +75,11 @@ public class Point {
 	 * @return
 	 */
 	public Color getColor(String color){
-		 String str = color.toLowerCase();
-		 Color color_tmp = Color.valueOf(str);
+//		 String str = color.toLowerCase();
+		 Color color_tmp = Color.valueOf(color);
+		// ColorPicker c = 
 		 return color_tmp;
+		
 	}
 	
 	/**
@@ -85,7 +88,7 @@ public class Point {
 	 * @param this_player_color
 	 * @param opponent_color
 	 * @return
-	 */
+	 */	
 	public Node draw(int cellWidth, String this_player_color, String opponent_color) {
 		Color upper_color = getColor(this_player_color);
 		Color lower_color = getColor(opponent_color);	

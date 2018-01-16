@@ -1,4 +1,4 @@
-package reversiapp;
+package GUIRelated;
 	
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -19,10 +19,10 @@ import javafx.geometry.Insets;
 
 
 public class Main extends Application {
-	static Stage primaryStage;
+	public static Stage primaryStage;
 	AnchorPane root;
-	static Scene menu_scene;
 
+	public static Scene menu_scene;
 	private int window_width = 600, window_height = 400;
 
 
