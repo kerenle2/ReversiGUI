@@ -99,7 +99,7 @@ public class ReversiGameController implements Initializable{
 //		news.setScene(startScene);
 //		news.show();
 		ImageView iv = new
-				ImageView(getClass().getResource("wood.jpeg").toExternalForm());
+				ImageView(getClass().getResource("backgroundgame.jpeg").toExternalForm());
 		iv.setFitHeight(this.window_height);
 		iv.setFitWidth(this.window_width);
 		this.root.getChildren().add(iv);
@@ -144,7 +144,7 @@ public class ReversiGameController implements Initializable{
 		Scene settingsScene = new Scene(this.root,600,400);
 		Main.primaryStage.setScene(settingsScene);
 		ImageView iv = new
-				ImageView(getClass().getResource("wood.jpeg").toExternalForm());
+				ImageView(getClass().getResource("backgroundgame.jpeg").toExternalForm());
 		iv.setFitHeight(this.window_height);
 		iv.setFitWidth(this.window_width);
 		this.root.getChildren().add(iv);

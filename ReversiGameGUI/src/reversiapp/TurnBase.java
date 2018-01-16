@@ -19,6 +19,7 @@ public class TurnBase {
 	Fliper fliper;
 	MovesCalculator moves_calculator;
 	boolean end_game = false;
+
 	
 	/**
 	 * constructor
@@ -76,33 +77,26 @@ public class TurnBase {
 	}
 
 	public void notifyNoMoves() {
-		Text text = new Text(current_player(current_turn_player).getColor() + " has no possible moves");
-		text.setFont(Font.font(15));
+		Text text = new Text("Player" + current_player(current_turn_player).getNum() + " has no moves!");
+		text.setFont(Font.font(16));
 		text.setFill(Color.DARKVIOLET);
 		this.spriets.addNode(text);
 	}
 	
 	private void printWinner(){
-		String winner = findWinner();
-		if (winner == "TIE") {
+		int winner = findWinner();
+		if (winner == 0) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Winner");
 			alert.setHeaderText(null);
-			alert.setContentText("Tie! " + this.spriets.getFirstPlayer() + " player and " + this.spriets.getSecondPlayer() + "player  have the same number of points" );
-
+			alert.setContentText("Tie!");
 			alert.showAndWait();
-			Text tie = new Text("Tie! X & O have the same number of points");
-			tie.setFont(Font.font ("Verdana", 20));
-			tie.setFill(Color.RED);
-//			board_controller.getChildren().add(al)
-			board_controller.add(tie, board_controller.getBoardSize() / 2, board_controller.getBoardSize() / 2);
-			System.out.println("Tie! X & O have the same number of points");
 		}
 		else {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information Dialog");
 			alert.setHeaderText(null);
-			alert.setContentText("the winner is the " + winner + " player");
+			alert.setContentText("Player " + winner + " WON!");
 			alert.showAndWait();
 		}
 	}
@@ -141,13 +135,13 @@ public class TurnBase {
 	}
 	
 
-	private String findWinner() {
+	private int findWinner() {
 		if (this.board_controller.getBoard().getCounter().getBlackCount() > this.board_controller.getBoard().getCounter().getWhiteCount()) {
 			return this.spriets.getFirstPlayer();
 		}
 		if (this.board_controller.getBoard().getCounter().getBlackCount() < this.board_controller.getBoard().getCounter().getWhiteCount()) {
 			return this.spriets.getSecondPlayer();
 		}
-		return "TIE";
+		return 0;
 	}
 }

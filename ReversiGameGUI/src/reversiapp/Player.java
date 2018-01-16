@@ -8,40 +8,39 @@ import javafx.scene.layout.GridPane;
 public class Player {
 	private char sign;
 	private boolean no_moves;
-	private String color;
+	private int num;
 	private Settings settings;
-	
-//	public Player(GridPane grid, char sign) {
-//		this.grid = grid;
-//		this.sign = sign;
-//		this.moves_calculator = new MovesCalculator();
-//		this.no_moves = false;
-//
-//		
-//		// Load the player's image
-//		iv = new
-//	ImageView(getClass().getResource("mandala.png").toExternalForm());
-//	}
 
+	/**
+	 * Constructor.
+	 * @param sign
+	 */
 	public Player(char sign) {
 		this.sign = sign;
 		this.no_moves = false;
 		this.settings = new Settings();
 		if (sign == 'X'){
-			this.color = settings.getColor1();
+			this.num = 1;
 		}
 		if (sign == 'O'){
-			this.color = settings.getColor2();
+			this.num = 2;
 		}
 
 	}
-	
-	
+	/**
+	 * return true if the player have no moves.
+	 * @return
+	 */
 	public boolean getNomoves() {
 		return this.no_moves;
 	}
 
-	
+	/**
+	 * get the list of the possible moves.
+	 * @param board
+	 * @param moves_calculator
+	 * @return
+	 */
 	public ArrayList<Point> get_possible_moves(Board board,
 			MovesCalculator moves_calculator) {
 		this.no_moves = false;
@@ -53,42 +52,28 @@ public class Player {
 		return options;
 	}
 
-	
+	/**
+	 * get the sign of the player (X/O)
+	 * @return
+	 */
 	public char get_sign() {
 		return this.sign;
 	}
 	
-	
+	/**
+	 * set the sign
+	 * @param sign
+	 */
 	public void set_sign(char sign){
 		this.sign = sign;
 	}
 
-
-	public String getColor() {
-		return this.color;
+	/**
+	 * get the number of the player
+	 * @return
+	 */
+	public int getNum() {
+		return this.num;
 	}
-//	public String getColor2() {
-//		return this.color2;
-//	}
-	
-	
-//	private boolean isAnOption(Point p, ArrayList<Point> options) {
-//		for (int i = 0; i < options.size(); i++) {
-//			if (p.get_row() == options.get(i).get_row()
-//					&& p.get_col() == options.get(i).get_col()) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-//	
 
-
-//	public void draw(int cellWidth, int cellHeight, int row, int col) {
-//		grid.add(iv, col, row);
-//		iv.setFitWidth(cellWidth);
-//		iv.setFitHeight(cellHeight);
-//		grid.getChildren().remove(iv);
-//		grid.add(iv, col, row);
-//		}
 }

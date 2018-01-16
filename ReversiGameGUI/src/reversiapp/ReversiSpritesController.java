@@ -2,9 +2,11 @@ package reversiapp;
 
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -17,27 +19,23 @@ public class ReversiSpritesController extends GridPane {
 		private VBox vbox =  new VBox(20);;
 		private ArrayList<Node> nodesToShow = new ArrayList<Node>();
 		private PointsCounter counter;
-		private String first_player;
-		private String second_player;
-		private String current_player;
+		private int first_player = 1;
+		private int second_player = 2;
+		private int current_player;
 		private Rectangle rec;
 		
 		
 		public ReversiSpritesController(PointsCounter counter,String first_player, String second_player){
 			this.counter = counter;
-			this.first_player = first_player;
-			this.second_player = second_player;
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReversiSprites.fxml"));
 			fxmlLoader.setRoot(this);
 			fxmlLoader.setController(this);
 		}
-		public String getCurrentPlayer(){
-			return this.current_player;
-		}
-		public String getFirstPlayer(){
+
+		public int getFirstPlayer(){
 			return this.first_player;
 		}
-		public String getSecondPlayer(){
+		public int getSecondPlayer(){
 			return this.second_player;
 		}
 		public void draw(char current_sign){
@@ -46,6 +44,7 @@ public class ReversiSpritesController extends GridPane {
 			int h = (int)this.getPrefHeight();
 			int w = (int)this.getPrefWidth();
 			//this.vbox = new VBox(20);
+			this.vbox.setPadding(new Insets(60));
 			this.getChildren().add(vbox);
 			if (current_sign == 'X'){
 				this.current_player = this.first_player;
@@ -54,15 +53,13 @@ public class ReversiSpritesController extends GridPane {
 				this.current_player = this.second_player;
 			}
 			
-			
-			
-			Text current = new Text("Current Player: " + this.current_player);
-			Text counterPlayer1 = new Text(this.first_player + " player score: " + String.valueOf(this.counter.getBlackCount()));
-			Text counterPlayer2 = new Text(this.second_player + " player score: " + String.valueOf(this.counter.getWhiteCount()));
+			Text current = new Text("Turn: Player" + this.current_player);
+			Text counterPlayer1 = new Text("player1: " + String.valueOf(this.counter.getBlackCount()));
+			Text counterPlayer2 = new Text("Player2: " + String.valueOf(this.counter.getWhiteCount()));
+			counterPlayer1.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
 
-			counterPlayer1.setFont(Font.font(18));
-			counterPlayer2.setFont(Font.font(18));
-			current.setFont(Font.font(18));
+			counterPlayer2.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+			current.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
 			
 			addNode(current);
 			addNode(counterPlayer1);
@@ -72,10 +69,7 @@ public class ReversiSpritesController extends GridPane {
 				vbox.getChildren().add(n);
 			}
 			nodesToShow.clear();
-//			vbox.getChildren().add(current);
-//			vbox.getChildren().add(counterPlayer1);
-//			vbox.getChildren().add(counterPlayer2);
-//			
+
 
 		}
 		

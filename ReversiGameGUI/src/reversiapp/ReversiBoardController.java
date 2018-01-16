@@ -2,15 +2,14 @@ package reversiapp;
 
 
 
-import java.util.ArrayList;
 
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 import reversiapp.Point;
@@ -18,8 +17,6 @@ import reversiapp.Point;
 
 public class ReversiBoardController extends GridPane {
 	private Board board;
-//	private TurnBase turn_base;
-	private FXMLLoader fxmlLoader;
 	private int board_size;
 	private boolean game_ended;
 	private Settings game_settings;
@@ -30,10 +27,6 @@ public class ReversiBoardController extends GridPane {
 		this.game_ended = false;
 		this.board_size = board_size;
 		this.board = new Board(board_size);
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReversiBoard.fxml"));
-		fxmlLoader.setRoot(this);
-		fxmlLoader.setController(this);
-		this.fxmlLoader = fxmlLoader;
 
 	}
 
@@ -65,13 +58,11 @@ public class ReversiBoardController extends GridPane {
 		//draw all cells
 		for (int i = 0; i < board_size; i++) {
 			for (int j = 0; j < board_size; j++) {
-					Rectangle rec = new Rectangle(cellWidth, cellHeight, Color.BURLYWOOD);
+					Rectangle rec = new Rectangle(cellWidth, cellHeight, Paint.valueOf("#F6C73C"));
 					rec.setStroke(Color.BLACK);
 					this.add(rec, j, i);
 			}
 		}
-		
-
 		//draw all players
 		String first_player_color = game_settings.getFirstPlayer();
 		String second_player_color= checkColor2();
@@ -110,7 +101,7 @@ public class ReversiBoardController extends GridPane {
 			move.setOnAction(event-> {
 				ReversiGameController.handlePointClick(move);
 				if (game_ended){
-					Main.primaryStage.setScene(Main.mene_scene);
+					Main.primaryStage.setScene(Main.menu_scene);
 
 				}
 			});

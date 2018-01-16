@@ -22,7 +22,9 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class Settings extends GridPane {
@@ -44,31 +46,31 @@ public class Settings extends GridPane {
 		settings.setFont(new Font("System Bold", 30));
 		vbox.getChildren().add(settings);
 
-		Text board_size_text = new Text("insert a board size between 4 to 20");
-		settings.setFont(new Font("System Bold", 30));
+		Text board_size_text = new Text("Board Size (4-20)");
+		settings.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
 		vbox.getChildren().add(board_size_text);
 
 		TextField board_size_field = new TextField();
-		board_size_field.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, new CornerRadii(1),
+		board_size_field.setBackground(new Background(new BackgroundFill(Paint.valueOf("#F6C73C"), new CornerRadii(1),
 		         new Insets(0.0,0.0,0.0,0.0))));
 		vbox.getChildren().add(board_size_field);
 		
 		
-		Text first_color_text = new Text("insert a color for the first player:");
-		settings.setFont(new Font("System Bold", 30));
+		Text first_color_text = new Text("Player1 color");
+//		settings.setFont(new Font("System Bold", 30));
 		vbox.getChildren().add(first_color_text);
 
 		TextField first_color_field = new TextField();
-		first_color_field.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, new CornerRadii(1),
+		first_color_field.setBackground(new Background(new BackgroundFill(Paint.valueOf("#F6C73C"), new CornerRadii(1),
 		         new Insets(0.0,0.0,0.0,0.0))));
 		vbox.getChildren().add(first_color_field);
 		
-		Text second_color_text = new Text("insert a color for the second player:");
-		settings.setFont(new Font("System Bold", 30));
+		Text second_color_text = new Text("Player2 color");
+//		second_color_text.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
 		vbox.getChildren().add(second_color_text);
 
 		TextField second_color_field = new TextField();
-		second_color_field.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, new CornerRadii(1),
+		second_color_field.setBackground(new Background(new BackgroundFill(Paint.valueOf("#F6C73C"), new CornerRadii(1),
 		         new Insets(0.0,0.0,0.0,0.0))));
 		vbox.getChildren().add(second_color_field);
 		
@@ -113,7 +115,7 @@ public class Settings extends GridPane {
 		}
 		writeToTextFile(board_size, first_color, second_color);
 		readFromTextFile();
-		Main.primaryStage.setScene(Main.mene_scene);
+		Main.primaryStage.setScene(Main.menu_scene);
 	}
 
 	public String getFirstPlayer(){
